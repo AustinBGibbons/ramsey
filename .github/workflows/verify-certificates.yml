@@ -36,7 +36,8 @@ jobs:
       - name: Show toolchain
         run: |
           python3 --version
+          cc --version
           c++ --version
 
-      - name: Verify frozen certificates
+      - name: Verify positive and negative certificates
         run: sh tests/run_certificate_checks.sh

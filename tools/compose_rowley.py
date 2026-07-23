@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expand the canonical template and prototype into the 42077-vertex colouring.
+"""Expand a Rowley template and prototype into a compound linear colouring.
 
 This implements the distance-set construction in Rowley's Theorem 3.2.  The
 template colours are 1,2,3 with 3 eliminated.  Prototype colours 1,2,3 are
@@ -78,8 +78,8 @@ def main() -> int:
     )
     payload = (
         "# Explicit Rowley compound linear five-colouring.\n"
-        "# Generated from results/order94_t12.template and\n"
-        "# sources/rowley_exoo_order453.prototype.\n"
+        f"# Generated from {args.template.as_posix()} and\n"
+        f"# {args.prototype.as_posix()}.\n"
         f"order {order}\n"
         "clique_sizes 5,5,5,5,5\n"
         f"colors {word}\n"

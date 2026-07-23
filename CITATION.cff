@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this construction or certificate packet, please cite this repository and the accompanying manuscript."
+title: "Nonmonotone Rowley Templates and the Bound R_5(5) >= 44,338"
+type: software
+authors:
+  - family-names: Gibbons
+    given-names: "Austin Lin"
+date-released: 2026-07-23
+repository-code: "https://github.com/AustinBGibbons/ramsey"
+url: "https://github.com/AustinBGibbons/ramsey"
+abstract: >-
+  An explicit order-99 effective Rowley (5,5,3) template yielding
+  R_5(5) >= 44,338, together with a semantic CNF reconstruction and
+  12 DRAT certificates proving nonexistence at order 98 for phi >= 40.
+preferred-citation:
+  type: article
+  title: "Nonmonotone Rowley Templates and the Bound R_5(5) >= 44,338"
+  authors:
+    - family-names: Gibbons
+      given-names: "Austin Lin"
+  year: 2026

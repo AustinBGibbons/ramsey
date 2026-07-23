@@ -1,0 +1,6 @@
+# Candidate effective Rowley (5,5,3) template of order 97.
+# Found in the reflected q=40 extension class; verify independently before use.
+order 97
+phi_min 40
+repeat_span 380
+colors 111212212222121112122121112122221221211133331311121221233333333333333333333333333212212111313333

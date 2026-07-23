@@ -1,7 +1,7 @@
 # Claim Ledger
 
-The JSON block is authoritative. Correctness, finite verification, target
-existence, and current-record status are separate claims.
+The JSON block is authoritative. Correctness, certificate coverage, source
+imports, and priority are separate claims.
 
 ```json
 {
@@ -9,197 +9,202 @@ existence, and current-record status are separate claims.
   "claims": [
     {
       "id": "DEF-001",
-      "statement": "For an integer m >= 2, a linear three-coloring of K_m is a map c:{1,...,m-1}->{1,2,3} that assigns edge {i,j}, 0 <= i < j <= m-1, the color c(j-i).",
-      "statement_sha256": "2c1ec0b4f31531dccd21c68b04d14d06b79e772df84d167f2f500c9bbde338ac",
-      "domain": "Complete graphs K_m with integer-labelled vertices and m >= 2.",
+      "statement": "For an integer m >= 2, a linear three-coloring of K_m is a map c:{1,...,m-1}->{1,2,3} assigning edge {i,j}, 0 <= i < j <= m-1, the color c(j-i).",
+      "statement_sha256": "d78c784be8c67c1c3b27ff4ccb5f0ee3c2523f5c885823a91b96baa4cad261c2",
+      "domain": "Complete graphs with vertices labelled by consecutive integers.",
       "quantifiers": "Definition for every integer m >= 2.",
-      "assumptions": ["Vertices are labelled 0 through m-1.", "Edges are undirected."],
+      "assumptions": ["Edges are undirected.", "Distances are ordinary positive integers."],
       "status": "definition",
       "origin": "source",
-      "evidence": ["arXiv:2203.13476v3, printed p. 2"],
+      "evidence": ["DEFINITIONS.md"],
       "obligations": [],
       "status_history": [
-        {"from": null, "to": "definition", "reason": "The source definition was normalized with its vertex and distance conventions."}
+        {"from": null, "to": "definition", "reason": "The source convention was normalized before search."}
       ]
     },
     {
       "id": "DEF-002",
-      "statement": "An operational (5,5,3) template certificate of order m with required phi lower bound q and span s is a word c:{1,...,m-1}->{1,2,3} such that c(m-1)=3, no distance at most q has color 3, the color-3 distances contain no a,b,a+b, and, after colors 1 and 2 are repeated with period m-1 on vertices 0,...,s, neither repeated color contains K_5; a full certificate additionally has s >= 4(m-2).",
-      "statement_sha256": "3ead1723e03ac01fe63604b8a9d0e66a463cd26a77aefb906a8eff52ab3a3dc0",
-      "domain": "Finite words over colors 1,2,3 with integer order, phi lower bound, and checked span.",
-      "quantifiers": "Definition for every m >= 2, q >= 0, and s >= 0.",
-      "assumptions": ["Periodic residue 0 is represented by base distance m-1.", "The sum-free test allows a=b."],
+      "statement": "An operational full (5,5,3) template certificate of order m and phi threshold q is a word c:{1,...,m-1}->{1,2,3} whose terminal distance has color 3, whose color-3 set avoids distances 1 through q and all triples a,b,a+b, and whose periodically repeated colors 1 and 2 contain no K_5 through span 4(m-2).",
+      "statement_sha256": "f57f5640d4012ab16b28753db576d86e0ef4725f27db2a880542c26acf7aba03",
+      "domain": "Finite three-symbol distance words with a distinguished template color.",
+      "quantifiers": "Definition for every m >= 2 and q >= 0.",
+      "assumptions": ["The terminal distance represents residue zero.", "The sum test permits a=b.", "Span is a maximum vertex label, not a vertex count."],
       "status": "definition",
       "origin": "new",
       "evidence": ["DEFINITIONS.md", "SRC-001"],
       "obligations": [],
       "status_history": [
-        {"from": null, "to": "definition", "reason": "Operational certificate semantics were fixed before search and include the full Rowley cutoff."}
+        {"from": null, "to": "definition", "reason": "Operational semantics include every hypothesis used by the finite verifier."}
       ]
     },
     {
       "id": "SRC-001",
-      "statement": "Rowley's generalized construction compounds a linear U(k_1,...,k_{q-1},3;m) having a triangle-free template with a linear V(...;n) to obtain a linear Ramsey graph of order (m-1)(n-1)+1+phi, where phi=min(T)-1; for an inherited color forbidding K_k, any offending K_k compresses to maximum edge length at most (k-1)(m-2).",
-      "statement_sha256": "95429d9ad46786ab4f33d84ec2439eee712431376476f92877b52aa1706a5bdd",
-      "domain": "Rowley's finite linear Ramsey graph construction.",
-      "quantifiers": "For every pair of linear prototypes satisfying Theorem 3.2 and every inherited color.",
-      "assumptions": ["The first prototype has a tf-template containing m-1.", "The second prototype has the source's linear Ramsey properties."],
+      "statement": "Rowley’s generalized construction combines an effective linear U(k_1,...,k_{q-1},3;m) template with a linear prototype of order n to produce a linear Ramsey coloring of order (m-1)(n-1)+1+phi, where phi=min(T)-1; inherited K_k obstructions compress to span (k-1)(m-2).",
+      "statement_sha256": "bdeab25e4e47ace9930e724ab6e284af126c66f452d44b55cb0387f31e51c0f9",
+      "domain": "Rowley's generalized linear Ramsey construction.",
+      "quantifiers": "For every pair of linear inputs satisfying Theorem 3.2 and each inherited color.",
+      "assumptions": ["The first input has a triangle-free template containing its terminal distance.", "The second input has the required linear Ramsey properties."],
       "status": "sourced-known-result",
       "origin": "source",
       "evidence": ["ART-001", "KNOWN_RESULTS.md"],
       "obligations": [],
       "citations": [
         {
-          "primary_id": "arXiv:1912.01164v3",
-          "location": "Definition 3.1 and Theorem 3.2 with proof, printed pp. 4-6",
-          "statement": "The generalized construction has order (m-1)(n-1)+1+phi and inherited-color obstructions compress to span (k_s-1)(m-2).",
-          "hypotheses": ["linear first prototype", "triangle-free template containing m-1", "linear second prototype"],
+          "primary_id": "Australasian Journal of Combinatorics 81(2) (2021), 245-256; arXiv:1912.01164v3",
+          "location": "Definition 3.1 and Theorem 3.2 with proof, pp. 248-251",
+          "statement": "The generalized construction has the stated order and finite inherited-color compression.",
+          "hypotheses": ["linear first prototype", "triangle-free terminal template", "linear second prototype"],
           "hypotheses_verified": true,
-          "verifier": "primary PDF text and formula audit on 2026-07-22",
-          "verified_on": "2026-07-22"
+          "verifier": "Primary-source formula and hypothesis audit",
+          "verified_on": "2026-07-23"
         }
       ],
       "status_history": [
-        {"from": null, "to": "sourced-known-result", "reason": "The theorem, construction sets, cutoff proof, and target hypothesis map were checked in the primary PDF."}
+        {"from": null, "to": "sourced-known-result", "reason": "The published theorem and proof were mapped to the operational certificate conditions."}
       ]
     },
     {
       "id": "SRC-002",
       "statement": "Rowley gives an effective (5,5,3) template of order 93 with phi=40 and, using an order-453 (5,5,5) prototype, obtains a five-color K_5-free graph of order 41625 and hence R_5(5)>=41626.",
       "statement_sha256": "453a7c5fb9dfa020001a1da90536c6f8ac35767815e18e86b7480354166677d6",
-      "domain": "Specific linear Ramsey templates and their Rowley compound graphs.",
-      "quantifiers": "Existence of the one published template and its stated compound construction.",
+      "domain": "Published effective Rowley templates and their compound colorings.",
+      "quantifiers": "Existence of the published order-93 template and stated compound.",
       "assumptions": ["The ancillary TFT(S) column is the Table 1 order-93 template."],
       "status": "sourced-known-result",
       "origin": "source",
-      "evidence": ["ART-002", "ART-003", "ART-004", "seeds/ROWLEY_ORDER93_EXTRACTION.md"],
+      "evidence": ["ART-002", "seeds/ROWLEY_ORDER93_EXTRACTION.md"],
       "obligations": [],
       "citations": [
         {
           "primary_id": "arXiv:2203.13476v3",
-          "location": "Equation (3.5), printed p. 4; Table 1, printed p. 6; ancillary spreadsheet sheet Paper_Sep_2022",
-          "statement": "An effective (5,5,3) template has order 93 and phi 40, yielding compound order 41625 and the bound 41626.",
-          "hypotheses": ["multiple-repetition template condition", "order-453 (5,5,5) prototype"],
+          "location": "Equation (3.5), Table 1, and ancillary sheet Paper_Sep_2022",
+          "statement": "The order-93 effective template with phi 40 yields the bound 41626.",
+          "hypotheses": ["multiple-repetition template condition", "order-453 linear prototype"],
           "hypotheses_verified": true,
-          "verifier": "primary PDF and ancillary XML audit on 2026-07-22",
-          "verified_on": "2026-07-22"
+          "verifier": "Primary PDF and ancillary-data audit",
+          "verified_on": "2026-07-23"
         }
       ],
       "status_history": [
-        {"from": null, "to": "sourced-known-result", "reason": "The table, formula, and explicit ancillary word were checked against the primary arXiv package."}
+        {"from": null, "to": "sourced-known-result", "reason": "The table, formula, and explicit ancillary word were checked."}
       ]
     },
     {
       "id": "SUR-001",
-      "statement": "Radziszowski's Small Ramsey Numbers, revision 18 dated 24 April 2026, records the lower bound R_5(5)>=41626 in Table XIa.",
-      "statement_sha256": "e44d970e78553804e443352a4a47bb776a552912a676c4fe49e3dbbb3f101e9c",
-      "domain": "Published specific multicolor Ramsey lower bounds as surveyed in revision 18.",
-      "quantifiers": "One recorded lower bound current at the survey revision date.",
-      "assumptions": ["Revision 18 is the checked survey version."],
+      "statement": "Radziszowski’s Small Ramsey Numbers, revision 18 dated 24 April 2026, records R_5(5)>=41626 in Table XIa.",
+      "statement_sha256": "f70ea7db60cba33566f10d704dafdbf67f34901c1c967e45108ffce70745f11e",
+      "domain": "Published specific multicolor Ramsey lower bounds in survey revision 18.",
+      "quantifiers": "One table entry at the stated revision date.",
+      "assumptions": ["Revision 18 is the checked survey revision."],
       "status": "sourced-known-result",
       "origin": "source",
-      "evidence": ["ART-005", "KNOWN_RESULTS.md"],
+      "evidence": ["ART-003", "KNOWN_RESULTS.md"],
       "obligations": [],
       "citations": [
         {
           "primary_id": "DOI:10.37236/21, revision 18",
           "location": "Title page and Table XIa, printed p. 55",
-          "statement": "The table entry for r=5 and m=5 is 41626.",
-          "hypotheses": ["classical diagonal five-color Ramsey number R_5(5)"],
+          "statement": "The r=5, m=5 lower-bound entry is 41626.",
+          "hypotheses": ["classical diagonal five-color Ramsey number"],
           "hypotheses_verified": true,
-          "verifier": "primary survey PDF text and table audit on 2026-07-22",
-          "verified_on": "2026-07-22"
+          "verifier": "Primary survey table audit",
+          "verified_on": "2026-07-23"
         }
       ],
       "status_history": [
-        {"from": null, "to": "sourced-known-result", "reason": "The exact table cell and revision date were checked in the primary survey PDF."}
-      ]
-    },
-    {
-      "id": "DER-001",
-      "statement": "If an operational full (5,5,3) template certificate of order 94 with phi at least 40 exists, then Rowley's construction with an order-453 (5,5,5) prototype produces a five-color K_5-free graph on at least 93*452+41=42077 vertices, and therefore R_5(5)>=42078.",
-      "statement_sha256": "2656cc49a0c89cd2e58aef5d13a162d28a9d7ccc4522080be1126ff0eae74b1d",
-      "domain": "Operational full order-94 certificates and Rowley compound graphs.",
-      "quantifiers": "For every order-94 certificate meeting the stated hypotheses.",
-      "assumptions": ["SRC-001", "the order-453 prototype used in SRC-002", "phi >= 40"],
-      "status": "sourced-known-result",
-      "origin": "source",
-      "evidence": ["SRC-001", "SRC-002", "KNOWN_RESULTS.md"],
-      "obligations": [],
-      "citations": [
-        {
-          "primary_id": "arXiv:1912.01164v3; arXiv:2203.13476v3",
-          "location": "Theorem 3.2, printed pp. 4-6; equation (3.5), printed p. 4",
-          "statement": "The compound order is (m-1)(n-1)+1+phi; substituting m=94, n=453, phi>=40 gives at least 42077.",
-          "hypotheses": ["full effective (5,5,3) template of order 94", "linear (5,5,5) prototype of order 453"],
-          "hypotheses_verified": true,
-          "verifier": "source specialization and independent integer arithmetic on 2026-07-22",
-          "verified_on": "2026-07-22"
-        }
-      ],
-      "status_history": [
-        {"from": null, "to": "sourced-known-result", "reason": "This is the direct target specialization of the checked source theorem and prototype."}
-      ]
-    },
-    {
-      "id": "FIN-001",
-      "statement": "The published order-93 word in seeds/rowley_order93.template is accepted as a full effective-template certificate through span 368 by both independent exact verifiers, which use distinct clique-search algorithms.",
-      "statement_sha256": "a36719a3bec8b908666b72b146862fed432607c5cdc64feadb0c831cb14e6e61",
-      "domain": "The fixed 92-symbol order-93 candidate file and vertices 0 through 368.",
-      "quantifiers": "Exact verification of one fixed source-derived word in both inherited colors.",
-      "assumptions": ["Candidate-file semantics in DEF-002", "period 92", "span 368"],
-      "status": "verified-exact-computation",
-      "origin": "new",
-      "evidence": ["ART-006", "ART-007", "ART-008", "tests/run_python_verifier_tests.sh", "tests/run_cpp_verifier_tests.sh"],
-      "obligations": [],
-      "status_history": [
-        {"from": null, "to": "verified-exact-computation", "reason": "A Python bit-mask checker and an independent C++ candidate-list checker both accept the source seed and reject semantic regression fixtures."}
+        {"from": null, "to": "sourced-known-result", "reason": "The exact table cell and revision date were checked."}
       ]
     },
     {
       "id": "FIN-002",
-      "statement": "The 452-symbol word in sources/rowley_exoo_order453.prototype is copied exactly from distances 1 through 452 of Rowley's archived order-977 template and defines a cyclic three-coloring of K_453 with no monochromatic K_5.",
-      "statement_sha256": "020eef717ef05dd525a4c3584a3548983b17c65255e828d39f49d0b13d4e61b3",
-      "domain": "The fixed source-derived 452-symbol linear three-coloring on vertices 0 through 452.",
-      "quantifiers": "Exact verification of one fixed prototype in all three colors.",
-      "assumptions": ["Rowley's order-977 construction copies prototype distances 1 through 452 verbatim.", "The ancillary spreadsheet column AB is the published order-977 template."],
+      "statement": "The word in sources/rowley_exoo_order453.prototype defines a linear three-coloring of K_453 with no monochromatic K_5.",
+      "statement_sha256": "b90adc16c7b0291e8cd251470830fe7b1212c48e8548323dc7ffe0021ff0b377",
+      "domain": "The frozen 452-symbol linear three-color word.",
+      "quantifiers": "All three colors and all five-vertex subsets of K_453.",
+      "assumptions": ["DEF-001"],
       "status": "verified-exact-computation",
       "origin": "new",
-      "evidence": ["ART-003", "ART-013", "ART-014", "ART-015", "ART-023"],
-      "obligations": [],
+      "evidence": ["ART-004", "ART-015", "ART-016"],
+      "obligations": ["OBL-001"],
       "status_history": [
-        {"from": null, "to": "verified-exact-computation", "reason": "The source extraction is hash-anchored, and independent Python bit-mask and C++ candidate-list searches find no monochromatic K_5 in any of the three colors."}
+        {"from": null, "to": "verified-exact-computation", "reason": "Independent Python and C++ exact clique searches reject K_5 in all three colors."}
       ]
     },
     {
-      "id": "FIN-003",
-      "statement": "The file results/r5_5_order42077.linear-coloring is the exact Rowley composition of results/order94_t12.template with sources/rowley_exoo_order453.prototype, has order 42077, assigns every positive distance through 42076 exactly once, and is cyclic.",
-      "statement_sha256": "61b22da8a4c218a2836200931e5939ee3ddf6bcf6c48c40f51ee5c41e80dff35",
-      "domain": "The frozen 42076-symbol five-color distance word and Rowley's displayed set-union construction.",
-      "quantifiers": "Exact verification of one fixed compound coloring.",
-      "assumptions": ["SRC-001", "FIN-002", "the canonical order-94 witness recorded by CON-001"],
+      "id": "CON-002",
+      "statement": "The word in results/order99_linear_prefix8.template is an effective Rowley (5,5,3) template of order 99 with phi=40.",
+      "statement_sha256": "966daab2a5deabe7f70b92441293c2df557b8a9f2946c344297852b6bafb8fd3",
+      "domain": "The frozen order-99 template word under DEF-002.",
+      "quantifiers": "Both inherited colors, every template sum, and the complete span through 388.",
+      "assumptions": ["DEF-002", "SRC-001"],
       "status": "verified-exact-computation",
       "origin": "new",
-      "evidence": ["ART-016", "ART-013", "ART-021", "ART-022", "ART-024"],
-      "obligations": [],
+      "evidence": ["ART-007", "ART-005", "ART-006", "ART-008"],
+      "obligations": ["OBL-002"],
       "status_history": [
-        {"from": null, "to": "verified-exact-computation", "reason": "A generator implements Rowley's block formula, while a separate set-union checker assigns all 42076 distances independently and matches the frozen word and hash."}
+        {"from": null, "to": "conjecture", "reason": "The order-99 search target was posed."},
+        {"from": "conjecture", "to": "verified-exact-computation", "reason": "A frozen word passes two independent full-condition verifiers at exact span 388."}
       ]
     },
     {
-      "id": "CON-001",
-      "statement": "There exists an operational full (5,5,3) template certificate of order 94 with phi at least 40 and repeat span 368.",
-      "statement_sha256": "5f630bcce91545ada4e4052aed177e2d5f54dee783e90424adc916db198cb19e",
-      "domain": "Words c:{1,...,93}->{1,2,3} under DEF-002.",
-      "quantifiers": "There exists one such word.",
-      "assumptions": ["order=94", "phi_min=40", "repeat_span=368"],
+      "id": "FIN-004",
+      "statement": "The file results/r5_5_order44337.linear-coloring is the exact Rowley composition of the order-99 template and order-453 prototype and defines a five-coloring of K_44337 without a monochromatic K_5; therefore R_5(5)>=44338.",
+      "statement_sha256": "4a7cc5b55168a61e05c7d07a25827bff9a5272964d9511567470617183fc20c2",
+      "domain": "The frozen 44336-symbol five-color distance word and Rowley's composition theorem.",
+      "quantifiers": "All five output colors and every edge of K_44337.",
+      "assumptions": ["SRC-001", "FIN-002", "CON-002"],
       "status": "verified-exact-computation",
       "origin": "new",
-      "evidence": ["ART-016", "ART-017", "ART-018", "ART-007", "ART-008", "ART-020"],
-      "obligations": ["OBL-001", "OBL-002"],
+      "evidence": ["ART-009", "ART-010", "ART-008"],
+      "obligations": ["OBL-003"],
       "status_history": [
-        {"from": null, "to": "conjecture", "reason": "The order-93 predecessor and exact verifier baseline were established; no order-94 witness had yet been certified."},
-        {"from": "conjecture", "to": "verified-exact-computation", "reason": "Three distinct frozen order-94 words, found by structured, direct, and lazy-SAT searches, all pass both independent full-condition verifiers; the canonical word is also overtested through four complete periods."}
+        {"from": null, "to": "verified-exact-computation", "reason": "The generator and independent set-union reconstruction match all distances and the source theorem transfers K_5-freeness."}
+      ]
+    },
+    {
+      "id": "NEG-001",
+      "statement": "No effective Rowley (5,5,3) template of order 98 has phi>=40.",
+      "statement_sha256": "e8e02ff9389458877867314155e06fc05459239d9f2c8752bc76ebe610116096",
+      "domain": "All 97-symbol three-color words satisfying DEF-002 at order 98 and threshold 40.",
+      "quantifiers": "Every two-color prefix and every unrestricted tail through terminal distance 97.",
+      "assumptions": ["DEF-002", "Global exchange of inherited colors preserves every condition."],
+      "status": "certificate-checked",
+      "origin": "new",
+      "evidence": ["ART-011", "ART-012", "ART-013"],
+      "obligations": ["OBL-004", "OBL-005"],
+      "status_history": [
+        {"from": null, "to": "conjecture", "reason": "Repeated searches indicated an order-98 obstruction."},
+        {"from": "conjecture", "to": "certificate-checked", "reason": "One prefix and eleven unrestricted-tail DRAT proofs verify after independent semantic CNF reconstruction."}
+      ]
+    },
+    {
+      "id": "STR-001",
+      "statement": "At fixed phi=40, existence of effective Rowley (5,5,3) templates is not monotone in the template order: templates exist at orders 97 and 99, but none exists at order 98.",
+      "statement_sha256": "e27d083951b417b3411e0068872cf5293becd2eea1a3d263e528c053f7004fd3",
+      "domain": "Effective Rowley (5,5,3) templates at phi 40 and orders 97 through 99.",
+      "quantifiers": "The three consecutive orders 97, 98, and 99.",
+      "assumptions": ["CON-002", "NEG-001"],
+      "status": "verified-exact-computation",
+      "origin": "new",
+      "evidence": ["ART-014", "ART-007", "ART-011"],
+      "obligations": ["OBL-006"],
+      "status_history": [
+        {"from": null, "to": "verified-exact-computation", "reason": "Independent positive checks at 97 and 99 combine with the certified exhaustive negative at 98."}
+      ]
+    },
+    {
+      "id": "PRI-001",
+      "statement": "Bounded primary-source and web searches completed on 23 July 2026 found no published collision with an order-99 effective (5,5,3) Rowley template or the bound R_5(5)>=44338.",
+      "statement_sha256": "e8d642181793b80dfa1378e0bfceda41bf59c65c7a0b14a8a3ef107e05e7009b",
+      "domain": "The explicitly checked literature corpus and indexed searches as of 23 July 2026.",
+      "quantifiers": "Only the checked corpus; no claim about unpublished or unindexed work.",
+      "assumptions": ["Search indexing is incomplete.", "Correctness and priority are independent."],
+      "status": "finite-case-evidence",
+      "origin": "new",
+      "evidence": ["KNOWN_RESULTS.md", "ART-003"],
+      "obligations": ["OBL-007"],
+      "status_history": [
+        {"from": null, "to": "finite-case-evidence", "reason": "The current survey, cited papers, arXiv update, and exact-value searches were checked without a collision."}
       ]
     }
   ]

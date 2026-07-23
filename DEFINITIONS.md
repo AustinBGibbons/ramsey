@@ -80,8 +80,31 @@ interval-sum-free, and neither repeated inherited color graph on
 \(\{0,\ldots,s\}\) contains \(K_5\). It is **full** when additionally
 \(s\ge4(m-2)\), the Rowley cutoff for inherited \(K_5\)'s.
 
-For the target \(m=94\), a repeat span of 368 means 369 vertices,
-\(\{0,\ldots,368\}\). Allocating only 368 vertices is an off-by-one error.
+For the headline template \(m=99\), a repeat span of 388 means 389 vertices,
+\(\{0,\ldots,388\}\). Allocating only 388 vertices is an off-by-one error.
+
+## Directed-Cayley form of the periodic condition
+
+For period \(p=m-1\) and inherited colour \(s\), define a directed relation
+on \(\mathbb Z_p\) by
+
+\[
+x\longrightarrow y
+\quad\Longleftrightarrow\quad
+c\!\left(((y-x-1)\bmod p)+1\right)=s.
+\]
+
+The infinite periodically repeated colour is \(K_5\)-free if and only if
+there are no distinct residues \(r_0,\ldots,r_4\) with
+
+\[
+r_i\longrightarrow r_j\qquad(0\le i<j\le4).
+\]
+
+Indeed, an integer witness reduces to such an ordered transitive \(K_5\).
+Conversely, lift the four successive residue differences by their least
+positive representatives. Their total is at most \(4(p-1)=4(m-2)\), which
+is the finite verification cutoff.
 
 ## Candidate-file format
 
@@ -89,10 +112,10 @@ Both independent verifiers accept the same data format but parse and check it
 independently:
 
 ```text
-order 94
+order 99
 phi_min 40
-repeat_span 368
-colors <93 symbols from 1,2,3>
+repeat_span 388
+colors <98 symbols from 1,2,3>
 ```
 
 Blank lines and text after `#` are ignored. Unknown fields, duplicate fields,

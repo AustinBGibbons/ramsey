@@ -118,3 +118,62 @@ c(d)=c(134-d)\quad(41\le d\le93).
 - By the source-checked composition theorem and the independently verified
   input certificates, it is \(K_5\)-free in all five colors. Hence it proves
   \(R_5(5)\ge42078\).
+
+## 2026-07-23 — Reflected extension family
+
+- The reflected \(\phi=40\) construction extends the retained positive
+  sequence through orders 95, 96, and 97.
+- For period \(p=2q+r\), \(q=40\), its template shell is encoded by
+  \(U\subseteq\{1,\ldots,r\}\). Within this family the template colour is
+  sum-free exactly when no \(a,b,c\in U\) satisfy
+  \(a+b+c=r+1\).
+- The order-97 word is frozen in `results/order97_reflected.template` and
+  passes both independent full-condition verifiers.
+- These family searches were hypothesis generation; only frozen positive
+  words and certificate-backed negative statements are promoted.
+
+## 2026-07-23 — Exhaustive order-98 nonexistence certificate
+
+- The constraint \(\phi\ge40\) forces a two-colour linear \(K_5\)-free
+  prefix on distances \(1,\ldots,40\).
+- Exact enumeration yields 22 prefixes, or 11 up to global exchange of the
+  two inherited colours.
+- One prefix-exhaustion CNF plus one unrestricted tail CNF for each
+  representative covers every order-98 candidate. Tail distances
+  \(41,\ldots,96\) are fully free in all three colours; distance 97 is the
+  template colour.
+- All 12 instances are UNSAT. Every DRAT proof verifies with `drat-trim`.
+- The independent checker regenerates the 45,374 unique prefix distance
+  sets, validates all listed prefixes, validates every recorded sum or
+  five-vertex obstruction, and reconstructs every CNF byte-for-byte before
+  proof checking.
+- This establishes global nonexistence at order 98 with \(\phi\ge40\), not
+  merely failure of the reflected family.
+
+## 2026-07-23 — Order-99 symmetry-breaking escape
+
+- Search over the 11 prefix types found an order-99 template using the eighth
+  non-cyclic \(K_{41}\) prefix.
+- The word in `results/order99_linear_prefix8.template` has period 98,
+  actual \(\phi=40\), 33 template-colour distances, and exact span 388.
+- Independent Python and C++ verifiers accept it. Their inherited-colour
+  search counts are 1,645,997 and 917,897 nodes in the Python implementation.
+- The Rowley composition has order
+  \(98\cdot452+41=44,337\). The complete word is frozen in
+  `results/r5_5_order44337.linear-coloring`.
+- The generator and a separate literal set-union reconstruction agree on all
+  44,336 distances and the SHA-256
+  `274acbf17bf7732b16ef7d20c97486eb469486907fd1357c16990ed4332f7158`.
+- The compound is linear and non-cyclic; no cyclicity hypothesis is used.
+- Orders 100–105 produced no positive in reconnaissance runs, but those
+  negatives have no retained proof certificates and are not claims.
+
+## 2026-07-23 — Release integration
+
+- The portable release gate now verifies the order-97 and order-99 positive
+  objects, the explicit \(K_{44,337}\) compound, and the complete order-98
+  DRAT packet.
+- `drat-trim.c` is vendored from upstream commit
+  `2e3b2dc0ecf938addbd779d42877b6ed69d9a985` under its MIT license and
+  compiled from source during verification.
+- The order-94 result and tests remain as reproducibility history.

@@ -1,0 +1,6 @@
+# Candidate effective Rowley (5,5,3) template of order 99.
+# Uses a non-cyclic 41-vertex linear prefix; verify independently before use.
+order 99
+phi_min 40
+repeat_span 388
+colors 21112112111222112222222211222111211211123211321111332323233313333313333113333133323332333111231123

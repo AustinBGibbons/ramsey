@@ -1,106 +1,107 @@
-# Known Results
+# Known Results and Source Map
 
-## `SRC-001` — Rowley's generalized construction and finite cutoff
+## `SRC-001` — Rowley's generalized construction
 
-Primary source: Fred Rowley, *A generalised linear Ramsey graph
-construction*, arXiv:1912.01164v3 (24 June 2021).
+Fred Rowley, “A generalised linear Ramsey graph construction,”
+*Australasian Journal of Combinatorics* **81**(2) (2021), 245–256.
 
-- Definition 3.1, printed p. 4: a tf-template is the distinguished
-  triangle-free distance class containing \(m-1\).
-- Theorem 3.2 and proof, printed pp. 4–6: a template
-  \(U(k_1,\ldots,k_{q-1},3;m)\) and a second linear prototype of order \(n\)
-  produce a compound graph of order
-  \((m-1)(n-1)+1+\phi\), with \(\phi=\min(T)-1\).
-- Proof on printed p. 5 continuing to p. 6: an inherited-color
-  \(K_{k_s}\) can be compressed so that its largest edge length is at most
-  \((k_s-1)(m-2)\).
+- Definition 3.1 defines the distinguished triangle-free template class.
+- Theorem 3.2 and its proof give compound order
+  \[
+  (m-1)(n-1)+1+\phi,\qquad \phi=\min(T)-1.
+  \]
+- The proof compresses an inherited-colour \(K_k\) obstruction to maximum
+  edge length at most \((k-1)(m-2)\).
 
-Hypothesis map: our colors 1 and 2 are the inherited colors with
-\(k_s=5\); color 3 is the tf-template; \(m=94\). Hence the exact sufficient
-span is \(4(94-2)=368\).
+For an order-99 \((5,5,3)\) template, the exact sufficient cutoff for each
+inherited colour is \(4(99-2)=388\).
 
-Source wording caveat: the theorem statement describes \(Q\) as the maximum
-clique number in \(U\), whereas the proof defines the controlling quantity
-as \(\sup(k_s-1)\). For the published \((5,5,3)\) seed both inherited
-colors contain \(K_4\), so both readings give \(Q=4\). This project relies on
-the proof's explicit per-color bound.
+Primary source:
+<https://ajc.maths.uq.edu.au/pdf/81/ajc_v81_p245.pdf>
 
-## `SRC-002` — published order-93 template and 41626 bound
+Source wording caveat: the displayed theorem and its proof phrase the
+controlling clique parameter differently. The project uses the explicit
+per-inherited-colour compression in the proof. The same convention agrees
+with Rowley's published order-93 computation.
 
-Primary source: Fred Rowley, *Improved Lower Bounds for Multicolour Ramsey
-Numbers using SAT-Solvers*, arXiv:2203.13476v3 (18 September 2022).
+## `SRC-002` — Rowley's published order-93 template
 
-- Equation (3.5), printed p. 4: the template composition formula.
-- Table 1, printed p. 6: an effective \((5,5,3)\) template of order 93,
-  with \(\phi=40\), and the resulting order-41625 five-color construction,
-  hence \(R_5(5)\ge41626\).
-- Ancillary spreadsheet, sheet `Paper_Sep_2022`, column `TFT(S)`: the
-  explicit template word and a multiple-repetition test through graph order
-  369.
+Fred Rowley, “Improved Lower Bounds for Multicolour Ramsey Numbers using
+SAT-Solvers,” arXiv:2203.13476v3 (18 September 2022).
 
-The exact extraction, including distance-class lists and the source archive
-hash, is in `seeds/ROWLEY_ORDER93_EXTRACTION.md`.
+- Equation (3.5) gives the template composition formula.
+- Table 1 gives an effective \((5,5,3)\) template of order 93 with
+  \(\phi=40\).
+- With an order-453 \((5,5,5)\) prototype it yields a five-colour
+  \(K_5\)-free graph of order 41,625 and hence
+  \(R_5(5)\ge41,626\).
 
-## Recovering and checking the order-453 prototype
+The exact seed extraction is documented in
+`seeds/ROWLEY_ORDER93_EXTRACTION.md`.
 
-The order-\(453\) \((5,5,5)\) prototype is described in
-arXiv:1912.01164v3, printed p. 7, as an unpublished graph derived by Geoffrey
-Exoo; the paper uses it in a verified order-\(4072\) construction. The later
-paper arXiv:2203.13476v3 makes the prototype recoverable from primary archived
-data:
+Primary source: <https://arxiv.org/abs/2203.13476>
 
-- Section 5, printed p. 5, defines the search construction by copying the
-  edge colors of a cyclic order-\(n\) prototype at distances \(1,\ldots,n-1\),
-  before placing the new template color at distance \(n\).
-- Printed p. 6 states that the archived order-\(977\)
-  \((5,5,5,3)\) template was obtained by extending the order-\(453\)
-  Exoo-derived graph.
-- In the ancillary `Paper_Sep_2022` sheet, column `AB` is that order-\(977\)
-  template. Its entries at distances \(1,\ldots,452\) therefore reproduce the
-  order-\(453\) prototype verbatim; distance \(453\) is color 4, the new
-  template color.
+## `FIN-002` — recovered order-453 prototype
 
-The extracted 452-symbol word is frozen in
-`sources/rowley_exoo_order453.prototype`. Two independent exact clique
-searches verify that it is cyclic and contains no monochromatic \(K_5\) in
-any of its three colors. Thus the composition corollary no longer depends on
-an unavailable private prototype file.
+The order-453 \((5,5,5)\) prototype used by Rowley is recoverable from the
+archived order-977 template in the primary ancillary data: its first 452
+distance colours reproduce the prototype, and distance 453 introduces the
+new template colour.
 
-## `SUR-001` — current recorded specific lower bound
+The extracted word is
+`sources/rowley_exoo_order453.prototype`. Independent Python and C++ exact
+clique searches verify that all three colours are \(K_5\)-free. Its
+SHA-256 is
+`19c97e6279c184f6f462786cadda4b7c9773d870a5b680a04eb1503ef384a2d0`.
 
-Primary source: Stanisław P. Radziszowski, *Small Ramsey Numbers*,
-Electronic Journal of Combinatorics Dynamic Survey DS1, revision 18,
-24 April 2026, DOI 10.37236/21.
+## `SUR-001` — checked survey benchmark
 
-Table XIa, printed p. 55, records \(R_5(5)\ge41626\). The title page identifies
-revision 18 as the 24 April 2026 revision. The official survey page checked on
-22 July 2026 exposed revision 18 as the latest available revision.
+Stanisław P. Radziszowski, “Small Ramsey Numbers,” *Electronic Journal of
+Combinatorics*, Dynamic Survey DS1, revision 18, 24 April 2026,
+DOI 10.37236/21.
 
-## January 2026 collision check
+Table XIa, printed p. 55, records \(R_5(5)\ge41,626\).
 
-Marcelo Campos and Cosmin Pohoata, *An update on multicolor Ramsey lower
-bounds*, arXiv:2601.15183v1 (21 January 2026), proves asymptotic
-multicolor lower-bound improvements. It does not state a new specific
-\(R_5(5)\) bound or an order-94 \((5,5,3)\) template.
+Primary source: <https://doi.org/10.37236/21>
 
-Bounded search outcome, 22 July 2026: searches for the target value 42078 and
-an order-94 Rowley template found no collision. This is a target-liveness
-check, not a novelty conclusion.
+## 2026 literature collision check
 
-## `DER-001` — target payoff
+Marcelo Campos and Cosmin Pohoata, “An update on multicolor Ramsey lower
+bounds,” arXiv:2601.15183 (2026), concerns asymptotic multicolour lower
+bounds. It does not state the finite bound \(R_5(5)\ge44,338\) or an
+order-99 \((5,5,3)\) template.
 
-For a target order-94 template with \(\phi\ge40\), specialize Rowley's
-formula using the order-453 \((5,5,5)\) prototype:
+Bounded searches on 23 July 2026 for the exact value 44,338, an order-99
+Rowley template, and follow-ups to Rowley's papers found no collision. This
+is a liveness check, not proof of priority.
+
+## `DER-002` — present payoff
+
+Substituting \(m=99\), \(n=453\), and \(\phi=40\) into Rowley's theorem gives
 
 \[
-(94-1)(453-1)+1+\phi
-\ge93\cdot452+41=42077.
+(99-1)(453-1)+1+40
+=98\cdot452+41
+=44,337.
 \]
 
-The resulting explicit five-color \(K_5\)-free graph proves
-\(R_5(5)\ge42078\).
+The antecedents are met by
+`results/order99_linear_prefix8.template` and the recovered order-453
+prototype. The complete output is
+`results/r5_5_order44337.linear-coloring`, so
 
-The antecedent is now met by `results/order94_t12.template`; the second
-prototype is the independently checked source extraction above. The exact
-expanded 42076-symbol distance word is
-`results/r5_5_order42077.linear-coloring`.
+\[
+R_5(5)\ge44,338.
+\]
+
+## `NEG-001` — order-98 nonexistence
+
+No external theorem is imported for this claim. It is a finite exhaustive
+result certified by 12 DRAT proofs and the semantic reconstructor in
+`certificates/order98_phi40_exhaustion/`.
+
+The prefix stage exhausts all two-colour linear \(K_5\)-free colourings on
+the first 40 distances. The tail stage leaves every remaining nonterminal
+distance free in all three colours and includes all template-sum and
+periodic-\(K_5\) constraints. Global exchange of inherited colours maps the
+11 stored prefix representatives to all 22 prefixes.

@@ -1,131 +1,97 @@
 # Results and Closeout
 
-## Lead result
+## Lead theorem
 
-An explicit effective Rowley \((5,5,3)\) template of order \(94\) and
-\(\phi=40\) has been found. Rowley's composition theorem, applied to the
-source-recovered cyclic \((5,5,5;453)\) prototype, gives an explicit cyclic
-five-coloring of \(K_{42077}\) with no monochromatic \(K_5\). Consequently,
+The frozen order-99 effective Rowley \((5,5,3)\) template with
+\(\phi=40\), combined with the verified linear \((5,5,5;453)\) prototype,
+produces an explicit five-colouring of \(K_{44,337}\) with no monochromatic
+\(K_5\). Hence
 
 \[
-\boxed{R_5(5)\ge42078}.
+\boxed{R_5(5)\ge44,338}.
 \]
 
-The canonical template certificate is
-`results/order94_t12.template`. The fully expanded five-color distance word is
-`results/r5_5_order42077.linear-coloring`.
+The compact certificate is `results/order99_linear_prefix8.template`; the
+complete distance colouring is
+`results/r5_5_order44337.linear-coloring`.
 
-## Claims changed
+## Structural theorem
 
-- `SRC-001`, `SRC-002`, and `SUR-001` are source-verified.
-- `DER-001` records the source theorem and exact 42078 implication.
-- `FIN-001` is a verified exact computation for the published order-93 seed.
-- `FIN-002` independently verifies the recovered order-453 prototype.
-- `FIN-003` independently checks the exact expanded compound word.
-- `CON-001` moved from `conjecture` to `verified-exact-computation`.
+There is no effective order-98 Rowley \((5,5,3)\) template with
+\(\phi\ge40\), while such templates exist at orders 97 and 99. Therefore
+feasibility at fixed \(\phi=40\) is nonmonotone in template order.
 
-## Evidence and artifacts produced
+The negative theorem is certified by:
 
-- Preserved primary source PDFs and Rowley's ancillary source archive.
-- Extracted and hashed the published order-93 word.
-- Found three distinct order-94 certificates by three search routes.
-- Added independent Python and C++ exact verifiers for both the template and
-  the recovered order-453 prototype.
-- Recovered all 452 prototype distance colors from Rowley's archived
-  order-977 template and checked them against the source XML.
-- Generated the complete 42076-symbol compound word and independently
-  reconstructed it from the displayed set-union formulas.
+- an exhaustive list of the 22 admissible two-colour length-40 prefixes,
+  represented by 11 words up to colour exchange;
+- one DRAT proof establishing that prefix list is exhaustive;
+- 11 unrestricted tail CNFs, one per representative;
+- 11 verified DRAT proofs of tail nonexistence; and
+- a semantic checker that validates every sum and \(K_5\) witness and
+  reconstructs each CNF byte-for-byte before proof checking.
 
-## Commands run and exit results
+## Exact artifacts
 
-```sh
-cd /Users/austingibbons/gather/maths/ramsey-template-94
-sh tests/run_python_verifier_tests.sh
-sh tests/run_cpp_verifier_tests.sh
-python3 search/template_search.py --self-test
-sh tests/run_end_to_end_checks.sh
-```
+- Order-99 template SHA-256:
+  `2643001cc425898d584bd374e20928d1dbc6a72fd4011711151343d0ad072966`.
+- Complete \(K_{44,337}\) colouring SHA-256:
+  `274acbf17bf7732b16ef7d20c97486eb469486907fd1357c16990ed4332f7158`.
+- Order-453 prototype SHA-256:
+  `19c97e6279c184f6f462786cadda4b7c9773d870a5b680a04eb1503ef384a2d0`.
+- Order-98 proof packet:
+  `certificates/order98_phi40_exhaustion/`, with per-file hashes in its
+  manifests.
 
-All commands exited 0. The semantic suites accept the published positive
-fixture and reject all seven invalid fixtures. The end-to-end suite:
+## Verification
 
-- checks both source extractions against the hash-fixed ancillary XML;
-- verifies the order-453 prototype in all three colors with two algorithms;
-- verifies all three order-94 words with two algorithms;
-- overtests the canonical word through span 372;
-- checks all 42076 compound distances, uniqueness, cyclic reflection, and the
-  frozen hash.
-
-## Continuous certificate verification
-
-The portable release-critical entry point is now:
+The portable release gate is:
 
 ```sh
 sh tests/run_certificate_checks.sh
 ```
 
-It excludes the heuristic search and third-party source archive while
-checking every frozen finite object used in the theorem. The complete local
-source-provenance path remains:
+It verifies all retained positive objects with independent algorithms,
+reconstructs the order-99 compound distance by distance, compiles the pinned
+`drat-trim` source, semantically reconstructs every negative CNF, and checks
+all 12 DRAT proofs.
+
+The source-provenance extension is:
 
 ```sh
 sh tests/run_end_to_end_checks.sh
 ```
 
-`.github/workflows/verify-certificates.yml` schedules the portable suite on
-both `ubuntu-latest` and `macos-latest` for pushes, pull requests, and manual
-dispatches. The workflow has read-only repository permissions and a
-20-minute job timeout. Local validation completed with:
+The dedicated headline-result suite is:
 
 ```sh
-sh tests/run_certificate_checks.sh
-sh tests/run_end_to_end_checks.sh
-ruby -e 'require "yaml"; ARGV.each { |f| YAML.load_file(f) }' \
-  .github/workflows/verify-certificates.yml
+sh tests/run_order99_breakthrough_checks.sh
 ```
 
-All exited 0. Hosted-runner execution remains an external deployment check
-until the repository is pushed to GitHub.
+## Interpretation
 
-## Failed approaches and negative results
+The order-99 word uses a non-cyclic \(K_{41}\) prefix. This is not a cosmetic
+variation: order 98 is globally impossible at \(\phi\ge40\), so the successful
+order-99 template cannot arise by a one-position continuation through every
+intermediate order. The directed-Cayley formulation identifies each
+periodic inherited-colour obstruction with an ordered transitive \(K_5\) on
+\(\mathbb Z_p\), explaining both the exact finite cutoff and the native SAT
+constraints.
 
-- A one-sum-defect lift failed because \(41+52=93\).
-- A 14-variable repair class was reported UNSAT by Kissat, but its DRAT output
-  has not been independently checked and is not claimed as a certified
-  negative.
-- A larger 55-variable repair branch was interrupted and is censored.
-- These branches are retained for provenance but are irrelevant to the three
-  positive witnesses.
+## Correctness and priority
 
-## Unresolved obligations and severity
-
-The two critical mathematical obligations `OBL-001` and `OBL-002` are
-discharged. Remaining external obligations are:
-
-- **Priority/novelty gate:** bounded searches found no collision, and the
-  current revision-18 survey still records 41626, but an external literature
-  check and author contact should precede a public priority claim.
-- **Independent-machine gate:** rerun `tests/run_end_to_end_checks.sh` from a
-  clean checkout on a second machine.
-- **Human promotion gate:** the harness deliberately does not label the result
-  `certificate-checked` or publication-ready until an external reviewer signs
-  off.
-
-## Recommended next actions
-
-1. Send the self-contained review packet and repository to Fred Rowley,
-   Stanisław Radziszowski, and an independent computational Ramsey referee.
-2. Ask Rowley to confirm the ancillary-column recovery of the order-453
-   prototype and the exact Theorem 3.2 specialization.
-3. After independent reproduction, prepare a short computational note centered
-   on \(L^T(5,5,3)\ge94\) and the corollary \(R_5(5)\ge42078\).
-4. Preserve the two alternative witnesses as robustness evidence; use the
-   reflected canonical witness in the paper because it also yields a cyclic
-   compound.
+The finite correctness claims are locally complete and machine-checkable.
+The latest checked standard survey, revision 18 dated 24 April 2026, records
+\(R_5(5)\ge41,626\); bounded primary-literature searches found no collision
+with 44,338. Absolute priority is not claimed until an external current
+literature check and author confirmation are complete.
 
 ## Human gate
 
-No human has yet approved a public novelty or publication-readiness claim.
-Mathematically, the finite certificate and theorem chain are complete; the
-remaining gate is independent external reproduction and priority review, not
-an open proof step.
+Recommended status: **ready for external mathematical and computational
+review**. Publication or record language should follow:
+
+1. clean-checkout reproduction on an independent machine;
+2. independent `drat-trim` build and certificate run;
+3. source-level review of Rowley's Theorem 3.2 specialization; and
+4. priority confirmation from domain experts.

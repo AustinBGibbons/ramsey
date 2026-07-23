@@ -1,78 +1,91 @@
 # Problem
 
-## Exact target — resolved
+## Exact statements now resolved
 
-Find an order-\(94\) effective Rowley \((5,5,3)\) template with
-\(\phi\ge 40\).
+The project establishes two finite statements about effective Rowley
+\((5,5,3)\) templates at the fixed threshold \(\phi=40\).
 
-Concretely, find a word
+### Positive statement
+
+Find and certify a word
 
 \[
-c:\{1,\ldots,93\}\longrightarrow\{1,2,3\}
+c:\{1,\ldots,98\}\longrightarrow\{1,2,3\}
 \]
 
 such that:
 
-1. \(c(93)=3\);
+1. \(c(98)=3\);
 2. \(c(d)\ne3\) for \(1\le d\le40\);
-3. the set \(T=c^{-1}(3)\) is interval-sum-free: there are no positive
-   \(a,b\) with \(a,b,a+b\in T\);
-4. for each \(s\in\{1,2\}\), form the graph on
-   \(\{0,\ldots,368\}\) in which \(i<j\) is an edge exactly when
+3. \(T=c^{-1}(3)\) contains no positive \(a,b,a+b\);
+4. for each \(s\in\{1,2\}\), the graph on
+   \(\{0,\ldots,388\}\) with
    \[
-   c\!\left(((j-i-1)\bmod93)+1\right)=s.
+   ij\in E_s
+   \Longleftrightarrow
+   c\!\left(((j-i-1)\bmod98)+1\right)=s
+   \quad(i<j)
    \]
-   Neither graph may contain \(K_5\).
+   contains no \(K_5\).
 
-By Rowley's compression theorem, span \(4(94-2)=368\) is sufficient for
-the inherited \(K_5\)-free colors. An explicit word satisfying these
-conditions would be a finite certificate for `CON-001`.
+This is resolved by `results/order99_linear_prefix8.template`.
 
-The canonical certificate is now
-`results/order94_t12.template`. Two additional distinct certificates are
-retained in `results/order94_direct.template` and
-`results/order94_lazy.template`.
+### Negative statement
 
-## Payoff
-
-Rowley's composition theorem, with the extracted and independently checked
-order-\(453\) \((5,5,5)\) prototype, gives a five-color \(K_5\)-free complete graph
-of order at least
+Prove that no analogous word
 
 \[
-(94-1)(453-1)+1+40=93\cdot452+41=42077.
+c:\{1,\ldots,97\}\longrightarrow\{1,2,3\}
 \]
 
-Therefore the resolved target gives
+exists with terminal distance \(97\), forbidden template colour through
+distance 40, interval-sum-free template colour, and both inherited colours
+\(K_5\)-free under period-97 repetition through span
+\(4(98-2)=384\).
+
+This is resolved by the exhaustive CNF/DRAT packet in
+`certificates/order98_phi40_exhaustion/`.
+
+Because `results/order97_reflected.template` and the order-99 template are
+valid while order 98 is impossible, fixed-\(\phi\) template feasibility is
+nonmonotone in the order.
+
+## Ramsey payoff
+
+Rowley's Theorem 3.2, applied to the verified order-99 template and the
+independently checked linear \((5,5,5;453)\) prototype, gives order
 
 \[
-R_5(5)\ge42078,
+(99-1)(453-1)+1+40=98\cdot452+41=44,337.
 \]
 
-improving the revision-18 survey bound \(R_5(5)\ge41626\) by \(452\).
+Therefore the explicit compound word proves
+
+\[
+\boxed{R_5(5)\ge44,338}.
+\]
 
 ## Scope boundary
 
-This project searches a highly structured class of linear distance
-colorings. It is not an exhaustive search over all five-colorings of a
-complete graph, and failure to find an order-\(94\) template does not prove
-that no such template exists unless a precisely specified restricted class
-is exhaustively certified.
+The positive result is an explicit linear distance colouring, not an
+exhaustive statement about all five-colourings of \(K_{44,337}\).
 
-A base \((5,5,3;94)\) coloring is not enough. The periodically repeated
-colors 1 and 2 must remain \(K_5\)-free through span 368. A heuristic score,
-solver assignment, or single-verifier pass is not a result.
+The negative result is exhaustive over **all** effective order-98
+\((5,5,3)\) templates with \(\phi\ge40\); it is not restricted to cyclic,
+reflected, or fixed-prefix tails. It does not rule out order 98 with smaller
+\(\phi\), or any order \(m\ge99\).
 
-## Success and failure conditions
+A base \((5,5,3;m)\) colouring is insufficient: the first two colours must
+remain \(K_5\)-free under periodic repetition through the exact Rowley cutoff
+\(4(m-2)\). A heuristic score, solver assignment, undersized span, or
+single-verifier pass is not a result.
 
-- **Certified success:** an explicit 93-symbol word passes both independent
-  exact verifiers on all four conditions above. The source-to-certificate map
-  and composition arithmetic are retained with the witness.
-- **Restricted negative:** every member of an exactly defined finite search
-  class is eliminated, with complete coverage and preferably a checkable
-  unsatisfiability certificate.
-- **Censored search:** a timed or iteration-limited run ends without a
-  witness. This is steering evidence only.
-- **Failure:** a purported order-\(94\) word passes only the base condition,
-  only one inherited color, an undersized span, or a search-engine-local
-  checker.
+## Success criteria
+
+- **Positive theorem:** a frozen word passes independent Python and C++ exact
+  verifiers and its Rowley compound is independently reconstructed.
+- **Negative theorem:** exhaustive case coverage is explicit, every CNF
+  clause has independently checked semantics, and every UNSAT claim has a
+  verified proof certificate.
+- **Priority claim:** kept separate from correctness and deferred to current
+  literature review and external author confirmation.

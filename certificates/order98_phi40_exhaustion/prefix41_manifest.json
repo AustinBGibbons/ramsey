@@ -1,0 +1,40 @@
+{
+  "base_clauses": 90748,
+  "blocking_clauses": 22,
+  "drat_trim_returncode": 0,
+  "drat_trim_tail": [
+    "",
+    "c 6464 of 90770 clauses in core                            ",
+    "",
+    "c 11198 of 14488 lemmas in core using 158313 resolution steps",
+    "",
+    "c 0 RAT lemmas in core; 978 redundant literals in core lemmas",
+    "",
+    "s VERIFIED",
+    "",
+    "c verification time: 1.158 seconds"
+  ],
+  "files": {
+    "prefix41_exhaust.cnf": {
+      "bytes": 2870295,
+      "sha256": "aec46291803dae6b29e180bded569d24102fa5234aa3b8be096177b3eac1c179"
+    },
+    "prefix41_exhaust.drat": {
+      "bytes": 714017,
+      "sha256": "02ee6ff73c60629c7b9efbac2a95d326537d23c22e4e83a9380bb7c392aef57d"
+    },
+    "prefix41_representatives.txt": {
+      "bytes": 484,
+      "sha256": "32cce43831c02f60f372d995b16f904cb6139d03f9df4ed16d27053735c42222"
+    }
+  },
+  "kissat_returncode": 20,
+  "kissat_tail": [
+    "s UNSATISFIABLE"
+  ],
+  "order": 41,
+  "representatives_up_to_color_swap": 11,
+  "total_clauses": 90770,
+  "unique_k5_distance_sets": 45374,
+  "variables": 40
+}

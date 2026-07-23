@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+tmp/
+output/pdf/*.log
+output/pdf/*.aux
+output/pdf/*.out
+output/pdf/*.xdv

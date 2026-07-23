@@ -1,0 +1,617 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{xurl}
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=blue!55!black,
+  urlcolor=blue!55!black,
+  pdfauthor={Austin Lin Gibbons},
+  pdftitle={Nonmonotone Rowley Templates and the Bound R5(5) >= 44338}
+]{hyperref}
+\usepackage{fancyhdr}
+
+\setlist[itemize]{leftmargin=1.5em,itemsep=2pt,topsep=4pt}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=2pt,topsep=4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt minus 1pt}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Nonmonotone Rowley templates}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{certificate}[theorem]{Certificate}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Rfive}{R_5(5)}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\sha}[1]{\begingroup\ttfamily\scriptsize\urlstyle{same}\nolinkurl{#1}\endgroup}
+\newcommand{\hashbreak}[2]{{\ttfamily\scriptsize #1\linebreak #2}}
+
+\title{\bfseries Nonmonotone Rowley Templates and the Bound\\[3pt]
+  \texorpdfstring{\boldmath$\Rfive\ge44{,}338$}{R5(5) >= 44338}}
+\author{Austin Lin Gibbons\thanks{Draft for independent review. Correctness,
+priority, and publication readiness are treated as separate questions.}}
+\date{23 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give an explicit effective Rowley $(5,5,3)$ template of order $99$ with
+extension parameter $\phi=40$. Its inherited distance colours remain
+$K_5$-free under period-$98$ repetition through the exact cutoff
+$4(99-2)=388$, and its third distance class is sum-free. Combining it with
+an explicit linear $(5,5,5;453)$ prototype by Rowley's generalized
+construction yields a five-colouring of $K_{44,337}$ without a
+monochromatic $K_5$. Consequently,
+\[
+  R_5(5)\ge44{,}338.
+\]
+We also certify that no effective $(5,5,3)$ template of order $98$ has
+$\phi\ge40$. Since templates with $\phi=40$ exist at orders $97$ and $99$,
+feasibility at fixed extension threshold is nonmonotone in the order.
+The negative result is exhaustive: one DRAT certificate proves that the
+first forty distances have only twenty-two admissible two-colour prefixes,
+and eleven further DRAT certificates exclude every unrestricted tail up to
+global colour exchange. An independent semantic checker reconstructs all
+CNFs from explicit sum and five-vertex witnesses before proof checking.
+The positive objects are checked by independent Python and C++ clique
+searches, and the full compound word is reconstructed independently.
+\end{abstract}
+
+\medskip
+\noindent\textbf{Keywords.} Multicolour Ramsey numbers; linear colourings;
+triangle-free templates; SAT certificates; DRAT; nonmonotonicity.
+
+\noindent\textbf{MSC 2020.} 05C55, 05D10, 68V15.
+
+\section{Introduction}
+
+For positive integers $r$ and $k$, the diagonal multicolour Ramsey number
+$R_r(k)$ is the least $N$ such that every $r$-edge-colouring of $K_N$
+contains a monochromatic $K_k$. Thus an explicit $r$-colouring of
+$K_M$ without a monochromatic $K_k$ proves $R_r(k)\ge M+1$.
+
+Rowley developed a composition method in which a linear colouring with a
+distinguished triangle-free template is combined with a second linear
+Ramsey colouring \cite{rowley-general,rowley-sat}. His published effective
+$(5,5,3)$ template of order $93$ and parameter $\phi=40$, combined with an
+order-$453$ prototype, gives
+\[
+  R_5(5)\ge41{,}626.
+\]
+Revision 18 of the standard survey records the same value
+\cite{radziszowski}.
+
+This note provides an order-$99$ template at the same value of $\phi$.
+The compound order is
+\[
+  (99-1)(453-1)+1+40=44{,}337,
+\]
+giving the asserted lower bound $44{,}338$. The complete $44{,}336$-symbol
+distance word is included in the accompanying artifact package.
+
+The intervening failure at order $98$ is not merely a failed search.
+It is proved by exhaustive case decomposition and checkable
+unsatisfiability certificates. Together with valid templates at orders $97$
+and $99$, this proves that the set of feasible orders at fixed $\phi$ need
+not be an interval. The order-$99$ word uses a non-cyclic forty-symbol
+prefix, making symmetry breaking part of the mathematical mechanism rather
+than a search convenience.
+
+The latest survey checked here is revision 18, dated 24 April 2026
+\cite{radziszowski}. Bounded searches found no competing order-$99$
+template or the numerical bound $44{,}338$. This is not a proof of priority;
+the claims of this note are correctness claims pending external
+current-literature review.
+
+\section{Linear templates}
+
+\begin{definition}[Linear distance colouring]
+Let $m\ge2$. A linear three-colouring of $K_m$ is a word
+\[
+  c:\{1,\ldots,m-1\}\longrightarrow\{1,2,3\},
+\]
+where edge $\{i,j\}$, $i<j$, receives colour $c(j-i)$. Put
+$p=m-1$ and
+\[
+  A_1=c^{-1}(1),\qquad A_2=c^{-1}(2),\qquad T=c^{-1}(3).
+\]
+\end{definition}
+
+The set $T$ is the distinguished template colour. Its linear graph is
+triangle-free exactly when
+\begin{equation}
+  \nexists\,a,b>0\quad a,b,a+b\in T,
+  \label{eq:sumfree}
+\end{equation}
+including the case $a=b$. The extension parameter is
+\[
+  \phi=\min(T)-1.
+\]
+
+For $s\in\{1,2\}$, repeat inherited colour $s$ with period $p$ by assigning
+positive distance $d$ the base colour
+\begin{equation}
+  c\!\left(((d-1)\bmod p)+1\right).
+  \label{eq:periodic}
+\end{equation}
+The representative of residue zero is therefore $p$, not $0$.
+
+\begin{definition}[Effective $(5,5,3)$ template]
+An order-$m$ word is effective with parameter $\phi$ if:
+\begin{enumerate}
+  \item $p=m-1$ belongs to $T$ and $\min(T)-1=\phi$;
+  \item $T$ satisfies \eqref{eq:sumfree}; and
+  \item for $s=1,2$, the periodically repeated colour in
+  \eqref{eq:periodic} contains no $K_5$.
+\end{enumerate}
+\end{definition}
+
+The infinite-looking final condition has an exact finite form.
+
+\begin{lemma}[Directed-Cayley cutoff]
+\label{lem:cutoff}
+Fix an inherited colour $s$ and period $p$. Define a directed relation on
+$\Z_p$ by
+\[
+  x\longrightarrow y
+  \quad\Longleftrightarrow\quad
+  c\!\left(((y-x-1)\bmod p)+1\right)=s.
+\]
+The periodic colour contains a $K_5$ if and only if there are distinct
+$r_0,\ldots,r_4\in\Z_p$ such that
+\[
+  r_i\longrightarrow r_j\qquad(0\le i<j\le4).
+\]
+If such a witness exists, one exists on integer vertices contained in
+$\{0,\ldots,4(p-1)\}$.
+\end{lemma}
+
+\begin{proof}
+An increasing integer witness reduces modulo $p$ to the displayed ordered
+relation. Equal residues cannot occur, because their difference is a
+multiple of $p$, represented by $p\in T$ rather than inherited colour $s$.
+
+Conversely, for $i=0,\ldots,3$, let $g_i\in\{1,\ldots,p-1\}$ be the least
+positive representative of $r_{i+1}-r_i$. Put $x_0=0$ and
+$x_{i+1}=x_i+g_i$. Then $x_j-x_i$ has residue $r_j-r_i$ for every
+$i<j$, so the five $x_i$ form a monochromatic clique. Moreover
+\[
+  x_4=g_0+g_1+g_2+g_3\le4(p-1).
+\]
+\end{proof}
+
+Lemma~\ref{lem:cutoff} is the $(5,5,3)$ specialization of the compression
+mechanism in Rowley's Theorem 3.2 \cite{rowley-general}. It also identifies
+the native finite obstruction: an ordered transitive $K_5$ in a directed
+Cayley relation.
+
+\section{The order-99 certificate}
+
+\begin{certificate}[Order-$99$ word]
+\label{cert:order99}
+Concatenate the following two lines:
+\begin{quote}
+\ttfamily\footnotesize
+2111211211122211222222221122211121121112321132111133232323331333331333\\
+3113333133323332333111231123
+\end{quote}
+The resulting word has length $98$.
+\end{certificate}
+
+\begin{proposition}
+\label{prop:order99}
+Certificate~\ref{cert:order99} is an effective $(5,5,3)$ template of order
+$99$ with $\phi=40$.
+\end{proposition}
+
+\begin{proof}
+Direct enumeration gives $98\in T$, $\min(T)=41$, $|T|=33$, and no
+$a,b,a+b\in T$. Two independent exact clique searches form the repeated
+inherited-colour graphs on vertices $0,\ldots,388$ and reject $K_5$ in
+both colours. By Lemma~\ref{lem:cutoff}, span $388=4(98-1)$ is complete.
+The Python implementation visits $1{,}645{,}997$ and $917{,}897$ search
+nodes for the two colours; the independent C++ implementation also returns
+\code{VALID}.
+\end{proof}
+
+The canonical file is
+\code{results/order99\_linear\_prefix8.template}, with SHA-256
+\begin{center}
+\sha{2643001cc425898d584bd374e20928d1dbc6a72fd4011711151343d0ad072966}.
+\end{center}
+Its first forty symbols contain twenty occurrences of each inherited colour
+and are not cyclically reflected.
+
+\section{The order-453 prototype}
+
+The second input is the $452$-symbol word in Appendix~\ref{app:prototype}.
+It is recovered from the archived order-$977$ template in Rowley's ancillary
+data: the first $452$ distances are the order-$453$ prototype and distance
+$453$ begins the newly introduced template colour \cite{rowley-sat}.
+
+\begin{proposition}
+\label{prop:prototype}
+The word in Appendix~\ref{app:prototype} defines a cyclic linear
+three-colouring of $K_{453}$ with no monochromatic $K_5$.
+\end{proposition}
+
+\begin{proof}
+Independent Python bit-mask and C++ ordered-vector clique searches
+exhaustively reject $K_5$ in each colour. Their exact node counts are,
+respectively,
+\[
+\begin{array}{c|rrr}
+ &1&2&3\\ \hline
+\text{Python}&1{,}040{,}265&5{,}811{,}421&782{,}585\\
+\text{C++}&237{,}855&837{,}235&201{,}199.
+\end{array}
+\]
+Direct comparison also gives $v(d)=v(453-d)$ for
+$1\le d\le452$.
+\end{proof}
+
+The artifact
+\code{sources/rowley\_exoo\_order453.prototype} has SHA-256
+\begin{center}
+\sha{19c97e6279c184f6f462786cadda4b7c9773d870a5b680a04eb1503ef384a2d0}.
+\end{center}
+Once the word is explicit and Proposition~\ref{prop:prototype} is checked,
+its historical recovery is no longer a logical dependency.
+
+\section{The compound colouring}
+
+Set $p=98$. Let $A_1,A_2,T$ be the classes of
+Certificate~\ref{cert:order99}, and let $B_1,B_2,B_3$ be the prototype
+classes. For $s=1,2$, define
+\begin{equation}
+\begin{split}
+A'_s={}&
+\{\ell+(\mu-1)p:\ell\in A_s,\ 1\le\mu\le452\}\\
+&{}\cup
+\{\ell+452p:\ell\in A_s,\ 1\le\ell\le40\}.
+\end{split}
+\label{eq:inherited}
+\end{equation}
+For $j=1,2,3$, put
+\begin{equation}
+  B'_j=\{\ell+(\mu-1)p:\ell\in T,\ \mu\in B_j\}.
+  \label{eq:prototype}
+\end{equation}
+
+\begin{lemma}
+\label{lem:partition}
+The five sets $A'_1,A'_2,B'_1,B'_2,B'_3$ partition
+$\{1,\ldots,44{,}336\}$.
+\end{lemma}
+
+\begin{proof}
+For $1\le d\le452p$, write uniquely
+$d=\ell+(\mu-1)p$ with $1\le\ell\le p$ and
+$1\le\mu\le452$. If $\ell\in A_s$, equation \eqref{eq:inherited} assigns
+$d$ to $A'_s$. If $\ell\in T$, exactly one $B_j$ contains $\mu$, and
+\eqref{eq:prototype} assigns $d$ to $B'_j$.
+
+The remaining distances are $452p+\ell$ with $1\le\ell\le40$. Since
+$T\cap[1,40]=\varnothing$, the second line of
+\eqref{eq:inherited} assigns each uniquely.
+\end{proof}
+
+The five class sizes are
+\[
+\begin{array}{c|rrrrr|r}
+\text{class}&A'_1&A'_2&B'_1&B'_2&B'_3&\text{total}\\ \hline
+\text{size}&16{,}292&13{,}128&4{,}488&6{,}402&4{,}026&44{,}336.
+\end{array}
+\]
+
+\begin{theorem}
+\label{thm:main}
+The distance classes in \eqref{eq:inherited}--\eqref{eq:prototype} define a
+five-colouring of $K_{44,337}$ without a monochromatic $K_5$. Consequently,
+\[
+  \Rfive\ge44{,}338.
+\]
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:partition} defines the colouring. We exclude the two types of
+output colour separately.
+
+\emph{Inherited colours.}
+Suppose output colour $s\in\{1,2\}$ contains a $K_5$. Translate its least
+vertex to zero and reduce all five vertices modulo $p$. Every ordered
+pairwise residue difference lies in $A_s$. Lemma~\ref{lem:cutoff} therefore
+produces a $K_5$ in the finite repeated graph on
+$0,\ldots,388$, contradicting Proposition~\ref{prop:order99}.
+
+\emph{Prototype-derived colours.}
+Fix $j\in\{1,2,3\}$ and suppose output colour $j+2$ contains a $K_5$.
+Translate its least vertex to zero. Each other vertex has a unique
+representation
+\[
+  d_i=t_i+(\mu_i-1)p,\qquad t_i\in T,\quad\mu_i\in B_j.
+\]
+For $d_i<d_k$, membership of $d_k-d_i$ in $B'_j$ forces
+$t_i\ge t_k$: if $t_i<t_k$, then the positive residue
+$t_k-t_i$ would belong to $T$, contradicting
+$t_i+(t_k-t_i)=t_k$ and sum-freeness.
+
+Thus the residues $t_i$ are nonincreasing along the ordered vertices. The
+prototype index of $d_k-d_i$ is then $\mu_k-\mu_i$, whether
+$t_i=t_k$ or $t_i>t_k$. Hence every positive difference
+$\mu_k-\mu_i$ lies in $B_j$. The indices are strictly increasing, so the
+five indices, including zero for the translated least vertex, form a
+monochromatic $K_5$ in prototype colour $j$, contradicting
+Proposition~\ref{prop:prototype}.
+
+All five colours are $K_5$-free. The order calculation gives
+\[
+  98\cdot452+41=44{,}337,
+\]
+and the Ramsey inequality follows.
+\end{proof}
+
+The complete word is
+\code{results/r5\_5\_order44337.linear-coloring}, with SHA-256
+\begin{center}
+\sha{274acbf17bf7732b16ef7d20c97486eb469486907fd1357c16990ed4332f7158}.
+\end{center}
+It is linear and non-cyclic. A generator implementing the block formula and
+an independent literal set-union reconstruction agree on all $44{,}336$
+symbols.
+
+\section{Certified nonexistence at order 98}
+
+\begin{theorem}
+\label{thm:hole}
+There is no effective Rowley $(5,5,3)$ template of order $98$ with
+$\phi\ge40$.
+\end{theorem}
+
+\begin{proof}[Certificate architecture]
+Any candidate has period $97$, terminal distance $97$ in $T$, and
+$T\cap[1,40]=\varnothing$. Thus the first forty distances form a two-colour
+linear colouring of $K_{41}$ with neither colour containing $K_5$.
+
+\emph{Stage 1: exhaustive prefixes.}
+For each five-set $V\subseteq\{0,\ldots,40\}$, let
+\[
+  \Delta(V)=\{|u-v|:u,v\in V,\ u\ne v\}.
+\]
+If Boolean variable $x_d$ selects inherited colour 1 at distance $d$, the
+two clauses
+\[
+  \bigvee_{d\in\Delta(V)}x_d,\qquad
+  \bigvee_{d\in\Delta(V)}\neg x_d
+\]
+exclude a monochromatic $K_5$ in colours 2 and 1. Deduplication over all
+$V$ gives $45{,}374$ distinct distance sets and $90{,}748$ clauses.
+
+There are 22 satisfying prefix words, stored as 11 representatives up to
+global exchange of colours 1 and 2. Adding blocking clauses for those 22
+words makes the prefix CNF unsatisfiable. The file
+\code{prefix41\_exhaust.drat} is a verified DRAT proof of that UNSAT
+instance. Independently, the semantic checker regenerates all $45{,}374$
+sets, checks each representative directly, reconstructs the CNF
+byte-for-byte, and invokes the proof checker.
+
+\emph{Stage 2: unrestricted tails.}
+For each of the 11 representatives, introduce three one-hot variables for
+every distance $1,\ldots,97$. Fix only the selected first forty symbols and
+the terminal template colour. Every distance $41,\ldots,96$ is allowed all
+three colours.
+
+For every $a,b>0$ with $a+b\le97$, include the clause forbidding all of
+$a,b,a+b$ from lying in $T$. Each inherited-colour obstruction clause
+carries an explicit ordered witness
+\[
+  0=v_0<v_1<\cdots<v_4\le384.
+\]
+Its period-$97$ distance coordinates are
+\[
+  D(V)=
+  \left\{((v_j-v_i-1)\bmod97)+1:0\le i<j\le4\right\},
+\]
+and the clause forbids all coordinates of $D(V)$ from receiving the
+corresponding inherited colour. Every such clause is therefore a valid
+necessary condition for a template.
+
+All 11 tail CNFs are UNSAT, with verified DRAT proofs. The semantic checker
+validates every sum identity and every five-vertex witness, then reconstructs
+each CNF byte-for-byte before proof checking. Exchanging inherited colours
+covers the complementary 11 prefixes. Hence every possible first forty
+symbols and every unrestricted tail are eliminated.
+\end{proof}
+
+\begin{remark}
+The tail formulas need not contain every possible $K_5$ clause. Each recorded
+clause is valid, and UNSAT of a relaxation containing only recorded valid
+obstructions already proves that no candidate exists.
+\end{remark}
+
+The certificate packet is
+\code{certificates/order98\_phi40\_exhaustion/}. It contains 12 CNF/DRAT
+pairs, semantic clause sidecars, prefix representatives, hash manifests, and
+the independent checker. The checker compiles against a pinned
+MIT-licensed copy of \code{drat-trim} \cite{drat-trim}.
+
+\begin{corollary}[Nonmonotonicity]
+\label{cor:nonmonotone}
+At fixed threshold $\phi=40$, existence of an effective $(5,5,3)$ template
+is not monotone in the template order.
+\end{corollary}
+
+\begin{proof}
+The frozen word \code{results/order97\_reflected.template} is accepted by
+both exact verifiers, Theorem~\ref{thm:hole} excludes order $98$, and
+Proposition~\ref{prop:order99} supplies order $99$.
+\end{proof}
+
+\section{Verification and reproducibility}
+
+All release-critical checks run with Python 3, a C compiler, a C++17
+compiler, and a POSIX shell:
+\begin{quote}
+\ttfamily\small
+sh tests/run\_certificate\_checks.sh
+\end{quote}
+The suite has no third-party Python dependency. It:
+\begin{enumerate}
+  \item runs positive and deliberately corrupted fixtures against independent
+  template verifiers;
+  \item checks all three prototype colours with two clique algorithms;
+  \item checks the order-$97$ and order-$99$ words with both algorithms;
+  \item regenerates the complete compound and independently reconstructs all
+  output distance sets;
+  \item compiles the pinned \code{drat-trim.c}; and
+  \item semantically reconstructs all order-$98$ CNFs and verifies all 12
+  DRAT proofs.
+\end{enumerate}
+GitHub Actions executes the same command on Ubuntu and macOS.
+
+The two clique implementations share only the mathematical specification.
+The Python code uses arbitrary-precision bit masks; the C++ code uses
+ordered candidate vectors. Both exhaustively recurse on a candidate set
+intersected with the forward neighbours of each selected vertex. A branch is
+pruned only when fewer candidates remain than the number of required clique
+vertices.
+
+The $44{,}337$-vertex graph is not checked by a naive all-vertex clique
+enumeration. Its correctness follows from Theorem~\ref{thm:main}, whose two
+finite inputs are checked exactly.
+
+\section{Scope and literature status}
+
+Theorem~\ref{thm:hole} is exact only at order $98$ and threshold
+$\phi\ge40$. It says nothing about smaller $\phi$ or later orders. Solver
+reconnaissance at orders $100$ through $105$ produced no positive object,
+but those runs are not certificate-backed and are not claims.
+
+Rowley's 2022 paper gives $R_5(5)\ge41{,}626$
+\cite{rowley-sat}; revision 18 of the dynamic survey records that value
+\cite{radziszowski}. The asymptotic update of Campos and Pohoata does not
+state a competing finite value \cite{campos-pohoata}. Searches for
+$44{,}338$, an order-$99$ effective template, and follow-ups to Rowley's
+construction found no collision in the checked corpus.
+
+Accordingly, the present status is:
+\begin{center}
+\textbf{finite correctness certified locally; external priority review
+required.}
+\end{center}
+
+\appendix
+
+\section{Order-453 prototype word}
+\label{app:prototype}
+
+Concatenate the following seven lines exactly:
+\begin{quote}
+\ttfamily\scriptsize
+1222333322121112131212231312221323223233222132322323322111112212111221\\
+3132231212232313223121323231222132332111122233231221212233323221121321\\
+2111223121122233232332332323322233233211111221111123131222213122313122\\
+1213222312112223322211213222312122131322131222213132111112211111233233\\
+2223323233233232332221121322111212312112232333221212213233222111123323\\
+1222132323121322313232212132231312211121221111122332322323122233232232\\
+31222131322121312111212233332221
+\end{quote}
+
+\section{Principal artifact hashes}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.58\textwidth}@{}}
+\toprule
+Artifact & SHA-256\\
+\midrule
+Order-$99$ template &
+\hashbreak{2643001cc425898d584bd374e20928d1}
+{dbc6a72fd4011711151343d0ad072966}\\
+Order-$97$ template &
+\hashbreak{3287e4737fed6d355d59c4c08c3140a}
+{829508039293914109c78000c7ba3a309}\\
+Order-$453$ prototype &
+\hashbreak{19c97e6279c184f6f462786cadda4b7c}
+{9773d870a5b680a04eb1503ef384a2d0}\\
+Complete compound &
+\hashbreak{274acbf17bf7732b16ef7d20c97486eb}
+{469486907fd1357c16990ed4332f7158}\\
+Prefix-exhaustion CNF &
+\hashbreak{aec46291803dae6b29e180bded569d24}
+{102fa5234aa3b8be096177b3eac1c179}\\
+Prefix-exhaustion DRAT &
+\hashbreak{02ee6ff73c60629c7b9efbac2a95d32}
+{6537d23c22e4e83a9380bb7c392aef57d}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Acknowledgement}
+
+Computational exploration and technical drafting used automated coding and
+language-model assistance. Every mathematical claim in this note is tied to
+explicit source text, finite objects, or independently checkable
+certificates; no model output is used as authority.
+
+\begin{thebibliography}{9}
+\raggedright
+
+\bibitem{rowley-general}
+F. Rowley,
+\newblock A generalised linear Ramsey graph construction,
+\newblock \emph{Australasian Journal of Combinatorics} \textbf{81}(2)
+(2021), 245--256.
+\newblock \url{https://ajc.maths.uq.edu.au/pdf/81/ajc_v81_p245.pdf}.
+
+\bibitem{rowley-sat}
+F. Rowley,
+\newblock Improved lower bounds for multicolour Ramsey numbers using
+SAT-solvers,
+\newblock \emph{arXiv:2203.13476v3}, 2022.
+\newblock \url{https://arxiv.org/abs/2203.13476}.
+
+\bibitem{radziszowski}
+S. P. Radziszowski,
+\newblock Small Ramsey numbers,
+\newblock \emph{Electronic Journal of Combinatorics}, Dynamic Survey DS1,
+revision 18, 24 April 2026.
+\newblock \url{https://doi.org/10.37236/21}.
+
+\bibitem{campos-pohoata}
+M. Campos and C. Pohoata,
+\newblock An update on multicolor Ramsey lower bounds,
+\newblock \emph{arXiv:2601.15183}, 2026.
+\newblock \url{https://arxiv.org/abs/2601.15183}.
+
+\bibitem{drat-trim}
+M. Heule and N. Wetzler,
+\newblock DRAT-trim proof checker,
+\newblock \url{https://github.com/marijnheule/drat-trim}.
+
+\end{thebibliography}
+
+\end{document}

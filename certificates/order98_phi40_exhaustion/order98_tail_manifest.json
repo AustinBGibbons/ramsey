@@ -1,0 +1,438 @@
+{
+  "period": 97,
+  "phi_min": 40,
+  "prefix_representatives": 11,
+  "records": [
+    {
+      "cnf_clauses": 27007,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 94 of 27007 clauses in core                            ",
+        "",
+        "c 1 of 6793 lemmas in core using 94 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.059 seconds"
+      ],
+      "files": {
+        "order98_prefix_01.clauses.jsonl": {
+          "bytes": 4247574,
+          "sha256": "0ee002ca7a90b7852760930cfe911652566857fd54c5a84c9596ccb0ea7bc97e"
+        },
+        "order98_prefix_01.cnf": {
+          "bytes": 1096985,
+          "sha256": "471978e8a5b934067576be9c5ab72e6f9b56aa3d359b40b03a145da072a28782"
+        },
+        "order98_prefix_01.drat": {
+          "bytes": 520102,
+          "sha256": "cf58408a359e756e207609013398c1813ce7fd8e188f0fe80e7abab6382c26ec"
+        }
+      },
+      "index": 1,
+      "prefix": "2221211112112122212112122212112111121222",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 1513, \"blue\": {\"added\": 827, \"examined\": 1748, \"first_witness\": [0, 1, 2, 3, 45]}, \"kind\": \"separate\", \"red\": {\"added\": 686, \"examined\": 1509, \"first_witness\": [0, 4, 12, 33, 65]}, \"round\": 5, \"score_after\": 1513, \"time\": 1784833672.9795682}",
+        "{\"clauses\": 26537, \"kind\": \"sat\", \"round\": 6, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833673.0289128}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_01.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_01.drat\", \"status\": \"unsat\", \"time\": 1784833673.1747992}"
+      ]
+    },
+    {
+      "cnf_clauses": 14254,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 124 of 14254 clauses in core                            ",
+        "",
+        "c 1 of 2891 lemmas in core using 124 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.046 seconds"
+      ],
+      "files": {
+        "order98_prefix_02.clauses.jsonl": {
+          "bytes": 2160590,
+          "sha256": "4f6a01ba78212666c12c1b00998dd7a5bdcb918f2da05379508223cbb5b47d10"
+        },
+        "order98_prefix_02.cnf": {
+          "bytes": 535314,
+          "sha256": "69cacb0d67d7813adcfa8b88bce0c63f700075f265afae41373fc3e46b0267c1"
+        },
+        "order98_prefix_02.drat": {
+          "bytes": 249670,
+          "sha256": "fb0b516f15261568bd94d271fa0c66e3b6da2fd57b4fe502c2f3726232652205"
+        }
+      },
+      "index": 2,
+      "prefix": "2221212112112122211111122212112112121222",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 659, \"blue\": {\"added\": 659, \"examined\": 1634, \"first_witness\": [0, 1, 2, 3, 41]}, \"kind\": \"separate\", \"red\": {\"added\": 0, \"examined\": 0, \"first_witness\": null}, \"round\": 4, \"score_after\": 659, \"time\": 1784833673.5410402}",
+        "{\"clauses\": 13784, \"kind\": \"sat\", \"round\": 5, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833673.568609}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_02.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_02.drat\", \"status\": \"unsat\", \"time\": 1784833673.645205}"
+      ]
+    },
+    {
+      "cnf_clauses": 17097,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 160 of 17097 clauses in core                            ",
+        "",
+        "c 1 of 3455 lemmas in core using 160 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.060 seconds"
+      ],
+      "files": {
+        "order98_prefix_03.clauses.jsonl": {
+          "bytes": 2626966,
+          "sha256": "131f21d0ac1a1a1964d1965f4b02d8db7d00b97df613d43b9f9eacbe9585c22e"
+        },
+        "order98_prefix_03.cnf": {
+          "bytes": 662750,
+          "sha256": "05c01af26a1b52230aeb7cf0d509a83ca898afd20efceab93cc629c43bff9de9"
+        },
+        "order98_prefix_03.drat": {
+          "bytes": 308266,
+          "sha256": "f0633606f1eb974db9367f19445a5ab2d878c7ddcc0350d55cb28b407993ee28"
+        }
+      },
+      "index": 3,
+      "prefix": "2221212112112122212111121222111121121222",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 187, \"blue\": {\"added\": 0, \"examined\": 0, \"first_witness\": null}, \"kind\": \"separate\", \"red\": {\"added\": 187, \"examined\": 482, \"first_witness\": [0, 4, 12, 18, 41]}, \"round\": 9, \"score_after\": 187, \"time\": 1784833674.303168}",
+        "{\"clauses\": 16627, \"kind\": \"sat\", \"round\": 10, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833674.337675}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_03.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_03.drat\", \"status\": \"unsat\", \"time\": 1784833674.4336798}"
+      ]
+    },
+    {
+      "cnf_clauses": 17640,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 121 of 17640 clauses in core                            ",
+        "",
+        "c 1 of 2816 lemmas in core using 121 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.044 seconds"
+      ],
+      "files": {
+        "order98_prefix_04.clauses.jsonl": {
+          "bytes": 2717018,
+          "sha256": "f9256884bbcecdccdd798fbb10d9ed336abf39812235dce5878d50e3d620f05f"
+        },
+        "order98_prefix_04.cnf": {
+          "bytes": 685532,
+          "sha256": "8e709a94c1e4718d5dd8152d63cb229b11e6b51fbe60e642eb941bf8eb95d1f4"
+        },
+        "order98_prefix_04.drat": {
+          "bytes": 309803,
+          "sha256": "b7aa51be3eb8e151b5717172c82fab9e7b028b182093275fd358d0fa935806c4"
+        }
+      },
+      "index": 4,
+      "prefix": "1221212122112122211111122212112212121221",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 1094, \"blue\": {\"added\": 1094, \"examined\": 2597, \"first_witness\": [0, 2, 5, 7, 41]}, \"kind\": \"separate\", \"red\": {\"added\": 0, \"examined\": 0, \"first_witness\": null}, \"round\": 4, \"score_after\": 1094, \"time\": 1784833674.8427148}",
+        "{\"clauses\": 17170, \"kind\": \"sat\", \"round\": 5, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833674.8767989}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_04.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_04.drat\", \"status\": \"unsat\", \"time\": 1784833674.970975}"
+      ]
+    },
+    {
+      "cnf_clauses": 14982,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 160 of 14982 clauses in core                            ",
+        "",
+        "c 1 of 3800 lemmas in core using 160 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.049 seconds"
+      ],
+      "files": {
+        "order98_prefix_05.clauses.jsonl": {
+          "bytes": 2283603,
+          "sha256": "4e7af7f58632c9a6bbe278e225e300c9ba1c40bcbc762225325dad9c3b1f3f75"
+        },
+        "order98_prefix_05.cnf": {
+          "bytes": 570594,
+          "sha256": "7d1239510578b52bd9eeb3b33156d9c971809b8314a33fbc56560cbbee7eccc2"
+        },
+        "order98_prefix_05.drat": {
+          "bytes": 273025,
+          "sha256": "6b59d111f7ac9e602ccdb070be8c6ea8d25f39ac530c1be6ed2820e26e0ad7c4"
+        }
+      },
+      "index": 5,
+      "prefix": "2121211211122112222112222112211121121212",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 658, \"blue\": {\"added\": 639, \"examined\": 1522, \"first_witness\": [0, 1, 13, 18, 41]}, \"kind\": \"separate\", \"red\": {\"added\": 19, \"examined\": 44, \"first_witness\": [0, 2, 4, 39, 90]}, \"round\": 5, \"score_after\": 658, \"time\": 1784833675.357118}",
+        "{\"clauses\": 14512, \"kind\": \"sat\", \"round\": 6, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833675.388597}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_05.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_05.drat\", \"status\": \"unsat\", \"time\": 1784833675.464213}"
+      ]
+    },
+    {
+      "cnf_clauses": 17383,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 173 of 17383 clauses in core                            ",
+        "",
+        "c 70 of 5865 lemmas in core using 889 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.055 seconds"
+      ],
+      "files": {
+        "order98_prefix_06.clauses.jsonl": {
+          "bytes": 2667691,
+          "sha256": "987d901aafe61e286f0ce169b5952d4bf4176dbaea1eaa6bd4de814f98a07e21"
+        },
+        "order98_prefix_06.cnf": {
+          "bytes": 674809,
+          "sha256": "80f8e5b9a9cd53d573585334a39aea0237c977fa53355ed3eb7a81403a006a5b"
+        },
+        "order98_prefix_06.drat": {
+          "bytes": 400601,
+          "sha256": "fb0b0e8a7c6e1721f2cd241151aac4214ed539679c8c670184c7b034839fc790"
+        }
+      },
+      "index": 6,
+      "prefix": "2221211211112122212112122212111121121222",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 4217, \"blue\": {\"added\": 121, \"examined\": 260, \"first_witness\": [0, 1, 25, 44, 100]}, \"kind\": \"separate\", \"red\": {\"added\": 4096, \"examined\": 4275, \"first_witness\": [0, 4, 10, 14, 41]}, \"round\": 7, \"score_after\": 4217, \"time\": 1784833675.924756}",
+        "{\"clauses\": 16913, \"kind\": \"sat\", \"round\": 8, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833675.9581099}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_06.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_06.drat\", \"status\": \"unsat\", \"time\": 1784833676.0518029}"
+      ]
+    },
+    {
+      "cnf_clauses": 26618,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 88 of 26618 clauses in core                            ",
+        "",
+        "c 1 of 9514 lemmas in core using 88 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.061 seconds"
+      ],
+      "files": {
+        "order98_prefix_07.clauses.jsonl": {
+          "bytes": 4182101,
+          "sha256": "38e2ef5947c264b53b399cb9bf80877c292e65366597d07b7e7fcbaaab7ae10b"
+        },
+        "order98_prefix_07.cnf": {
+          "bytes": 1084746,
+          "sha256": "20143f51730f46b853504948cdb40537ce25d5e8de1b48ebbe944a653b12896d"
+        },
+        "order98_prefix_07.drat": {
+          "bytes": 528154,
+          "sha256": "b1eed01051f77e6b55f360128b14d637afca3e5d643ab52dfdd3f4f6a22ec53e"
+        }
+      },
+      "index": 7,
+      "prefix": "1221222122111122211111122211112212221221",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 7416, \"blue\": {\"added\": 3320, \"examined\": 7551, \"first_witness\": [0, 2, 7, 9, 45]}, \"kind\": \"separate\", \"red\": {\"added\": 4096, \"examined\": 4687, \"first_witness\": [0, 1, 12, 30, 58]}, \"round\": 5, \"score_after\": 7416, \"time\": 1784833676.54027}",
+        "{\"clauses\": 26148, \"kind\": \"sat\", \"round\": 6, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833676.5950239}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_07.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_07.drat\", \"status\": \"unsat\", \"time\": 1784833676.734611}"
+      ]
+    },
+    {
+      "cnf_clauses": 14798,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 118 of 14798 clauses in core                            ",
+        "",
+        "c 1 of 2603 lemmas in core using 118 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.054 seconds"
+      ],
+      "files": {
+        "order98_prefix_08.clauses.jsonl": {
+          "bytes": 2253606,
+          "sha256": "b371e6bb42e9e57ef73890a9a00f7ef7182c050bfd22292331a50fe9fbd63036"
+        },
+        "order98_prefix_08.cnf": {
+          "bytes": 561398,
+          "sha256": "4f759f7b4daefc8af7b0a55823e216173c26e79e7bf637fdeb2e3a8f10024af8"
+        },
+        "order98_prefix_08.drat": {
+          "bytes": 255960,
+          "sha256": "15c1364836b91c37e4204bf2834097d873599b5ae9e19f6562d378c4bf7c3e6e"
+        }
+      },
+      "index": 8,
+      "prefix": "2111211211122211222222221122211121121112",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 692, \"blue\": {\"added\": 692, \"examined\": 1572, \"first_witness\": [0, 1, 13, 14, 41]}, \"kind\": \"separate\", \"red\": {\"added\": 0, \"examined\": 0, \"first_witness\": null}, \"round\": 3, \"score_after\": 692, \"time\": 1784833677.0798101}",
+        "{\"clauses\": 14328, \"kind\": \"sat\", \"round\": 4, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833677.108483}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_08.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_08.drat\", \"status\": \"unsat\", \"time\": 1784833677.1811619}"
+      ]
+    },
+    {
+      "cnf_clauses": 17505,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 103 of 17505 clauses in core                            ",
+        "",
+        "c 1 of 4534 lemmas in core using 103 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.052 seconds"
+      ],
+      "files": {
+        "order98_prefix_09.clauses.jsonl": {
+          "bytes": 2690828,
+          "sha256": "b603083847d3a936ff1905346064b759cac4203007fc43acb0424d0bfe6c7ffd"
+        },
+        "order98_prefix_09.cnf": {
+          "bytes": 678429,
+          "sha256": "d95c10ce9bed537f3024b92f070657c71498ff3dca6c465573d35c7080e78dca"
+        },
+        "order98_prefix_09.drat": {
+          "bytes": 330190,
+          "sha256": "d6230ef12fc27dce0aff4f54a9a284b0131e10563b59c89ab961262280dba865"
+        }
+      },
+      "index": 9,
+      "prefix": "1222122122211121111221111211122212212221",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 687, \"blue\": {\"added\": 0, \"examined\": 0, \"first_witness\": null}, \"kind\": \"separate\", \"red\": {\"added\": 687, \"examined\": 1606, \"first_witness\": [0, 1, 13, 14, 41]}, \"round\": 5, \"score_after\": 687, \"time\": 1784833677.689355}",
+        "{\"clauses\": 17035, \"kind\": \"sat\", \"round\": 6, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833677.722392}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_09.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_09.drat\", \"status\": \"unsat\", \"time\": 1784833677.808958}"
+      ]
+    },
+    {
+      "cnf_clauses": 15670,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 163 of 15670 clauses in core                            ",
+        "",
+        "c 1 of 3730 lemmas in core using 163 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.046 seconds"
+      ],
+      "files": {
+        "order98_prefix_10.clauses.jsonl": {
+          "bytes": 2387256,
+          "sha256": "3b455ef27052eb47a98b34e02cb6d7b33847f1f7f1d8f9d87b20f5e4d6f89239"
+        },
+        "order98_prefix_10.cnf": {
+          "bytes": 595945,
+          "sha256": "bd303ad9d89c491ef7385be6397651ff09269df489ecc25e473387bbe04c705f"
+        },
+        "order98_prefix_10.drat": {
+          "bytes": 284625,
+          "sha256": "e4faa9c2bcc8ed452930ce4e10ed92b4175410e66ec1a37f83804ee5b01213d8"
+        }
+      },
+      "index": 10,
+      "prefix": "2221211211122112212112122112211121121222",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 529, \"blue\": {\"added\": 529, \"examined\": 1309, \"first_witness\": [0, 1, 2, 3, 41]}, \"kind\": \"separate\", \"red\": {\"added\": 0, \"examined\": 0, \"first_witness\": null}, \"round\": 6, \"score_after\": 529, \"time\": 1784833678.295119}",
+        "{\"clauses\": 15200, \"kind\": \"sat\", \"round\": 7, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833678.3254101}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_10.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_10.drat\", \"status\": \"unsat\", \"time\": 1784833678.408711}"
+      ]
+    },
+    {
+      "cnf_clauses": 15676,
+      "cnf_variables": 291,
+      "drat_trim_returncode": 0,
+      "drat_trim_tail": [
+        "",
+        "c 115 of 15676 clauses in core                            ",
+        "",
+        "c 1 of 4166 lemmas in core using 115 resolution steps",
+        "",
+        "c 0 RAT lemmas in core; 0 redundant literals in core lemmas",
+        "",
+        "s VERIFIED",
+        "",
+        "c verification time: 0.047 seconds"
+      ],
+      "files": {
+        "order98_prefix_11.clauses.jsonl": {
+          "bytes": 2397095,
+          "sha256": "55ec091bae7e8a55ad88ed5576867065c7421e92e0d17ec454b236645b23e7eb"
+        },
+        "order98_prefix_11.cnf": {
+          "bytes": 596767,
+          "sha256": "36fd257897c719ddb7493c9b59736874cff19d5e0783d819652323f4ae33bfb5"
+        },
+        "order98_prefix_11.drat": {
+          "bytes": 288518,
+          "sha256": "1925296e1534906fd404590f5382485e9c01a33b951a2513028ada7cc27aabe2"
+        }
+      },
+      "index": 11,
+      "prefix": "2111211211222211122222211122221121121112",
+      "search_returncode": 2,
+      "search_tail": [
+        "{\"added\": 604, \"blue\": {\"added\": 0, \"examined\": 0, \"first_witness\": null}, \"kind\": \"separate\", \"red\": {\"added\": 604, \"examined\": 1468, \"first_witness\": [0, 2, 4, 6, 41]}, \"round\": 5, \"score_after\": 604, \"time\": 1784833678.850788}",
+        "{\"clauses\": 15206, \"kind\": \"sat\", \"round\": 6, \"status\": \"unsat\", \"tail\": \"s UNSATISFIABLE\", \"time\": 1784833678.883873}",
+        "{\"cnf\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_11.cnf\", \"kind\": \"unsat-artifact\", \"proof\": \"/private/tmp/ramsey_order98_maximality/order98_prefix_11.drat\", \"status\": \"unsat\", \"time\": 1784833678.962738}"
+      ]
+    }
+  ],
+  "repeat_span": 384,
+  "target_order": 98
+}
