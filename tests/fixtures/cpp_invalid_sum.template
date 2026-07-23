@@ -1,0 +1,5 @@
+# T = {1,2,3} violates interval sum-freeness because 1+1=2.
+order 4
+phi_min 0
+repeat_span 8
+colors 333

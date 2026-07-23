@@ -1,0 +1,6 @@
+{"clauses": 383, "index": 0, "kind": "direct-start", "raw": 885, "score": 383, "time": 1784779847.443244, "truncated": false}
+{"clauses": 43, "index": 1, "kind": "direct-start", "raw": 84, "score": 43, "time": 1784779847.452387, "truncated": false}
+{"clauses": 13, "iteration": 1, "kind": "direct-best", "raw": 25, "restart": 0, "score": 13, "time": 1784779847.478087, "word": "222121121111212221211212221211112112122233332211211133333333333333333333333333333111211223333"}
+{"clauses": 4, "iteration": 2, "kind": "direct-best", "raw": 5, "restart": 0, "score": 4, "time": 1784779847.503547, "word": "222121121111212221211212221211112112122233332211211333333333333333333333333333333111211223333"}
+{"clauses": 1, "iteration": 3, "kind": "direct-best", "raw": 0, "restart": 0, "score": 1, "time": 1784779847.521924, "word": "222121121111212221211212221211112112122233332211211333333333333333333333333333333111211233333"}
+{"best_raw": 0, "best_score": 1, "best_word": "222121121111212221211212221211112112122233332211211333333333333333333333333333333111211233333", "iterations": 500, "kind": "timeout", "restarts": 21, "strategy": "direct", "time": 1784779853.418794}

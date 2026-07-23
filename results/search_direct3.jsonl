@@ -1,0 +1,27 @@
+{"clauses": 245, "index": 0, "kind": "direct-start", "raw": 527, "score": 245, "time": 1784779815.413337, "truncated": false}
+{"clauses": 191, "index": 1, "kind": "direct-start", "raw": 546, "score": 191, "time": 1784779815.4183612, "truncated": false}
+{"clauses": 41, "index": 2, "kind": "direct-start", "raw": 80, "score": 41, "time": 1784779815.421824, "truncated": false}
+{"clauses": 190, "index": 3, "kind": "direct-start", "raw": 476, "score": 190, "time": 1784779815.42694, "truncated": false}
+{"clauses": 191, "index": 4, "kind": "direct-start", "raw": 440, "score": 191, "time": 1784779815.430409, "truncated": false}
+{"clauses": 187, "index": 5, "kind": "direct-start", "raw": 413, "score": 187, "time": 1784779815.4337459, "truncated": false}
+{"clauses": 194, "index": 6, "kind": "direct-start", "raw": 467, "score": 194, "time": 1784779815.437304, "truncated": false}
+{"clauses": 98, "index": 7, "kind": "direct-start", "raw": 202, "score": 98, "time": 1784779815.440217, "truncated": false}
+{"clauses": 669, "index": 8, "kind": "direct-start", "raw": 1556, "score": 669, "time": 1784779815.4525719, "truncated": false}
+{"clauses": 245, "index": 9, "kind": "direct-start", "raw": 526, "score": 245, "time": 1784779815.4595468, "truncated": false}
+{"clauses": 302, "index": 10, "kind": "direct-start", "raw": 764, "score": 302, "time": 1784779815.465088, "truncated": false}
+{"clauses": 173, "index": 11, "kind": "direct-start", "raw": 468, "score": 173, "time": 1784779815.46869, "truncated": false}
+{"clauses": 125, "index": 12, "kind": "direct-start", "raw": 271, "score": 125, "time": 1784779815.472159, "truncated": false}
+{"clauses": 145, "index": 13, "kind": "direct-start", "raw": 335, "score": 145, "time": 1784779815.4772968, "truncated": false}
+{"clauses": 138, "index": 14, "kind": "direct-start", "raw": 378, "score": 138, "time": 1784779815.483917, "truncated": false}
+{"clauses": 145, "index": 15, "kind": "direct-start", "raw": 355, "score": 145, "time": 1784779815.487068, "truncated": false}
+{"clauses": 217, "index": 16, "kind": "direct-start", "raw": 494, "score": 217, "time": 1784779815.490689, "truncated": false}
+{"clauses": 212, "index": 17, "kind": "direct-start", "raw": 493, "score": 212, "time": 1784779815.4943979, "truncated": false}
+{"clauses": 221, "index": 18, "kind": "direct-start", "raw": 455, "score": 221, "time": 1784779815.498673, "truncated": false}
+{"clauses": 264, "index": 19, "kind": "direct-start", "raw": 519, "score": 264, "time": 1784779815.503171, "truncated": false}
+{"clauses": 284, "index": 20, "kind": "direct-start", "raw": 559, "score": 284, "time": 1784779815.508265, "truncated": false}
+{"clauses": 422, "index": 21, "kind": "direct-start", "raw": 1040, "score": 422, "time": 1784779815.518507, "truncated": false}
+{"clauses": 435, "index": 22, "kind": "direct-start", "raw": 1067, "score": 435, "time": 1784779815.5256598, "truncated": false}
+{"clauses": 176, "index": 23, "kind": "direct-start", "raw": 460, "score": 176, "time": 1784779815.529141, "truncated": false}
+{"clauses": 4, "iteration": 1, "kind": "direct-best", "raw": 5, "restart": 0, "score": 4, "time": 1784779815.591634, "word": "222121121111212221211212221211112112122233332211211333333333333333333333333333333111211223333"}
+{"clauses": 1, "iteration": 2, "kind": "direct-best", "raw": 0, "restart": 0, "score": 1, "time": 1784779815.645091, "word": "222121121111212221211212221211112112122233332211211333333333333333333333333333333111211233333"}
+{"best_raw": 0, "best_score": 1, "best_word": "222121121111212221211212221211112112122233332211211333333333333333333333333333333111211233333", "iterations": 1623, "kind": "timeout", "restarts": 59, "strategy": "direct", "time": 1784779875.1485782}

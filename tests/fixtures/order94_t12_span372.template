@@ -1,0 +1,5 @@
+# Deliberate overtest of the canonical witness through four full periods.
+order 94
+phi_min 40
+repeat_span 372
+colors 111212212222121112122121112122221221211131312321323233333333333333333333333333333232312321313

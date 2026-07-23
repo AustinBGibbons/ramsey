@@ -1,0 +1,7 @@
+# PROVISIONAL near-solution found by direct exact-profile search, seed 101.
+# Both periodically repeated inherited colors are K5-free through span 368.
+# It is NOT a valid template: its sole additive defect is 41 + 52 = 93 in T.
+order 94
+phi_min 40
+repeat_span 368
+colors 222121121111212221211212221211112112122233332211211333333333333333333333333333333111211233333

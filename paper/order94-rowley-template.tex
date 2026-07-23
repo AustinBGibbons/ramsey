@@ -1,0 +1,713 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{xurl}
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=blue!55!black,
+  urlcolor=blue!55!black,
+  pdfauthor={Austin Lin Gibbons},
+  pdftitle={An Order-94 Rowley Template and the Bound R5(5) >= 42078}
+]{hyperref}
+\usepackage{fancyhdr}
+
+\definecolor{headingblue}{RGB}{31,77,120}
+\definecolor{tableblue}{RGB}{38,82,122}
+\definecolor{lightrow}{RGB}{242,246,250}
+
+\hypersetup{bookmarksopen=true}
+\setlist[itemize]{leftmargin=1.5em,itemsep=2pt,topsep=4pt}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=2pt,topsep=4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt minus 1pt}
+\renewcommand{\arraystretch}{1.12}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{%
+  \csname the#1\endcsname\hspace{0.8em}}
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small An order-94 Rowley template}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{certificate}[theorem]{Certificate}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\K}{K}
+\newcommand{\Rfive}{R_5(5)}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\sha}[1]{\begingroup\ttfamily\scriptsize\urlstyle{same}\nolinkurl{#1}\endgroup}
+\newcommand{\hashbreak}[2]{{\ttfamily\scriptsize #1\linebreak #2}}
+
+\title{\bfseries An Order-94 Rowley Template and the Bound\\[3pt]
+  \texorpdfstring{\boldmath$\Rfive\ge 42078$}{R5(5) >= 42078}}
+\author{Austin Lin Gibbons\thanks{Draft for independent review. Mathematical
+correctness, priority, and publication readiness are treated as separate
+questions throughout.}}
+\date{23 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give an explicit effective Rowley $(5,5,3)$ template of order $94$ with
+extension parameter $\phi=40$.  Its two inherited distance colours remain
+$K_5$-free under period-$93$ repetition through the exact compression cutoff
+$4(94-2)=368$, while its third distance class is a sum-free triangle-free
+template.  We combine this template with an explicit cyclic three-colouring
+of $K_{453}$ recovered from Rowley's archived ancillary data.  The resulting
+five distance classes partition $\{1,\ldots,42076\}$ and define a cyclic
+five-colouring of $K_{42077}$.  A self-contained specialization of Rowley's
+composition argument proves that none of the five colours contains $K_5$.
+Consequently,
+\[
+  R_5(5)\ge 42078.
+\]
+All finite claims are checked by exact algorithms.  The order-$94$ template
+and order-$453$ prototype are each accepted by independent Python and C++
+clique searches using different internal representations, and the full
+compound word is reconstructed independently from the displayed set-union
+formula.  The checked revision of the standard survey records the previous
+bound $R_5(5)\ge41626$; priority beyond the literature corpus described here
+remains subject to external review.
+\end{abstract}
+
+\medskip
+\noindent\textbf{Keywords.} Multicolour Ramsey numbers; linear colourings;
+circulant colourings; triangle-free templates; exact computation.
+
+\noindent\textbf{MSC 2020.} 05C55, 05D10, 68W30.
+
+\section{Introduction}
+
+For positive integers $r$ and $k$, the diagonal multicolour Ramsey number
+$R_r(k)$ is the least $N$ such that every $r$-colouring of the edges of
+$K_N$ contains a monochromatic $K_k$.  An explicit $r$-colouring of
+$K_{N-1}$ without monochromatic $K_k$ proves $R_r(k)\ge N$.
+
+Rowley developed a composition method in which a small linear colouring
+containing a distinguished triangle-free template is combined with a second
+linear Ramsey colouring \cite{rowley-general,rowley-sat}.  In the case
+relevant here, his published order-$93$ effective $(5,5,3)$ template, with
+$\phi=40$, combines with an order-$453$ three-colouring to give a
+five-colouring of order $41625$, and hence
+\[
+  R_5(5)\ge41626.
+\]
+This value is recorded in revision 18 of Radziszowski's survey
+\cite{radziszowski}.
+
+The contribution of this paper is one additional template position.  We
+exhibit an order-$94$ effective $(5,5,3)$ template with the same value
+$\phi=40$.  The compound order becomes
+\[
+  (94-1)(453-1)+1+40
+  =93\cdot452+41
+  =42077.
+\]
+Thus the one-position extension is amplified into a gain of $452$ vertices.
+
+The proof has three logically separate inputs.
+\begin{itemize}
+  \item Section~\ref{sec:template} gives the explicit order-$94$ word and
+  the exact finite conditions it satisfies.
+  \item Section~\ref{sec:prototype} gives the explicit order-$453$
+  prototype recovered from Rowley's archived 2022 ancillary data.
+  \item Sections~\ref{sec:compound} and~\ref{sec:proof} define the compound
+  and prove directly that its five colours are $K_5$-free.
+\end{itemize}
+Search heuristics are not part of the proof.  The frozen words, the
+composition formula, and exact checkers form the certificate.
+
+\begin{remark}[Status and scope]
+The theorem proved here is a correctness claim.  The specific value $42078$
+was not found in the checked literature, and the checked survey revision
+records $41626$, but those facts do not establish priority.  A public
+priority claim should await an independent literature search and contact
+with specialists familiar with unpublished linear Ramsey constructions.
+\end{remark}
+
+\section{Linear colourings and triangle-free templates}
+\label{sec:definitions}
+
+\begin{definition}[Linear distance colouring]
+For $m\ge2$, a linear $q$-colouring of $K_m$ is a map
+\[
+  c:\{1,\ldots,m-1\}\longrightarrow\{1,\ldots,q\}.
+\]
+The edge $\{i,j\}$, where $0\le i<j\le m-1$, receives colour $c(j-i)$.
+It is cyclic if $c(d)=c(m-d)$ for every $1\le d\le m-1$.
+\end{definition}
+
+For a three-colour word $c$, put
+\[
+  A_1=c^{-1}(1),\qquad A_2=c^{-1}(2),\qquad T=c^{-1}(3).
+\]
+
+\begin{definition}[Triangle-free template]
+The third distance class $T$ is a triangle-free template, or
+\emph{tf-template}, if $m-1\in T$ and the colour-$3$ graph is triangle-free.
+Its extension parameter is
+\[
+  \phi=\min(T)-1.
+\]
+\end{definition}
+
+\begin{lemma}[Sum-free criterion]
+\label{lem:sumfree}
+The colour-$3$ graph of a linear word is triangle-free if and only if there
+do not exist positive integers $a,b$ such that
+\[
+  a\in T,\qquad b\in T,\qquad a+b\in T.
+\]
+The case $a=b$ is included.
+\end{lemma}
+
+\begin{proof}
+Translate the least vertex of any triangle to $0$ and write the other two
+vertices as $a<a+b$.  Its three edge lengths are $a$, $b$, and $a+b$.
+The converse is immediate from the same three vertices.
+\end{proof}
+
+For a period $p=m-1$, the inherited colours are repeated by assigning a
+positive distance $d$ the base colour
+\begin{equation}
+  c\!\left(((d-1)\bmod p)+1\right).
+  \label{eq:periodic-colour}
+\end{equation}
+Thus residue zero is represented by base distance $p$, not by $0$.  This
+convention is essential because the terminal distance $p$ belongs to the
+template colour.
+
+\begin{definition}[Effective $(5,5,3)$ certificate]
+\label{def:effective}
+An order-$m$ word is an effective $(5,5,3)$ certificate with parameter
+$\phi$ if:
+\begin{enumerate}
+  \item $m-1\in T$ and $\min(T)-1=\phi$;
+  \item $T$ satisfies Lemma~\ref{lem:sumfree}; and
+  \item for each $s\in\{1,2\}$, the periodic colour defined by
+  \eqref{eq:periodic-colour} has no $K_5$ on vertices
+  \[
+    0,1,\ldots,4(m-2).
+  \]
+\end{enumerate}
+\end{definition}
+
+The final cutoff is the specialization to $K_5$ of the compression argument
+in Rowley's Generalised Construction Theorem
+\cite[Definition 3.1 and Theorem 3.2]{rowley-general}.  For completeness,
+the same compression is written explicitly in
+Section~\ref{sec:proof}.
+
+\section{The order-94 template}
+\label{sec:template}
+
+\begin{certificate}[Canonical order-$94$ word]
+\label{cert:order94}
+Let $c(1)c(2)\cdots c(93)$ be the following word; displayed line breaks are
+typographic only:
+\begin{quote}
+\ttfamily\footnotesize
+11121221222212111212212111212222122121113131232132323333333333333333333333\\
+3333333232312321313
+\end{quote}
+Its distance classes are
+\begin{align*}
+A_1={}&\{1,2,3,5,8,13,15,16,17,19,22,24,25,26,28,33,36,38,39,40,\\
+&\hspace{1.75em}42,44,48,86,90,92\},\\
+A_2={}&\{4,6,7,9,10,11,12,14,18,20,21,23,27,29,30,31,32,34,35,37,\\
+&\hspace{1.75em}45,47,50,52,82,84,87,89\},\\
+T={}&\{41,43,46,49,51,53,54,55,56,57,58,59,60,61,62,63,64,65,66,\\
+&\hspace{1.75em}67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,83,85,88,91,93\}.
+\end{align*}
+\end{certificate}
+
+\begin{proposition}[Exact finite properties]
+\label{prop:order94}
+Certificate~\ref{cert:order94} is an effective $(5,5,3)$ certificate of
+order $94$ with $\phi=40$.  More explicitly:
+\begin{enumerate}
+  \item $93\in T$, $T\cap\{1,\ldots,40\}=\varnothing$, and $\min(T)=41$;
+  \item no $a,b,a+b$ all lie in $T$, including the case $a=b$;
+  \item neither inherited colour contains $K_5$ on vertices
+  $0,\ldots,368$; and
+  \item the reflection identities
+  \[
+    c(d)=c(41-d)\quad(1\le d\le40),
+    \qquad
+    c(d)=c(134-d)\quad(41\le d\le93)
+  \]
+  hold.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Items (1), (2), and (4) are direct complete enumerations on the displayed
+word.  For item (3), two independent exact clique searches construct the
+periodic colour graphs on the $369$ vertices $0,\ldots,368$ and exhaustively
+reject $K_5$ in both inherited colours.  The Python checker uses arbitrary
+precision integer bit masks for forward-neighbour sets; the C++ checker uses
+ordered integer candidate vectors and pairwise filtering.  Their algorithms
+and regression coverage are described in Section~\ref{sec:verification}.
+\end{proof}
+
+The canonical file is \code{results/order94\_t12.template}, with SHA-256
+\begin{center}
+\sha{a3dd3415956277d68fc0197f6f5e35c38f2ed7936c66f11f658b0c57688abec1}.
+\end{center}
+The same word is also accepted when overtested through distance $372$.
+Two further distinct accepted order-$94$ words are retained in the artifact
+package as robustness evidence, but they are not used below.
+
+\section{The order-453 prototype}
+\label{sec:prototype}
+
+Rowley's 2022 construction starts from a cyclic order-$n$ prototype, copies
+its colours at distances $1,\ldots,n-1$, and places the new template colour
+at distance $n$ \cite[Section 5]{rowley-sat}.  The archived order-$977$
+$(5,5,5,3)$ template in ancillary sheet \code{Paper\_Sep\_2022}, column
+\code{AB}, was obtained by extending an Exoo-derived order-$453$
+$(5,5,5)$ graph.  Consequently, entries $1,\ldots,452$ of that column are
+the prototype word, and entry $453$ begins colour $4$.
+
+The full $452$-symbol word is printed in Appendix~\ref{app:words}.
+
+\begin{proposition}[Source-recovered prototype]
+\label{prop:prototype}
+The word in Appendix~\ref{app:words} defines a cyclic three-colouring of
+$K_{453}$ with no monochromatic $K_5$.
+\end{proposition}
+
+\begin{proof}
+Every symbol was compared with the SHA-256-fixed ancillary XML.  The
+comparison also checks the sheet metadata and confirms that distance $453$
+begins the new template colour.  Independent Python bit-mask and C++
+ordered-vector searches then exhaustively reject $K_5$ in each of the three
+finite colour graphs.  Finally, direct comparison gives
+$v(d)=v(453-d)$ for all $1\le d\le452$.
+\end{proof}
+
+The extracted artifact is
+\code{sources/rowley\_exoo\_order453.prototype}, with SHA-256
+\begin{center}
+\sha{19c97e6279c184f6f462786cadda4b7c9773d870a5b680a04eb1503ef384a2d0}.
+\end{center}
+Once the word is explicit and Proposition~\ref{prop:prototype} is verified,
+the historical attribution is not a logical dependency of the main theorem.
+
+\section{The compound colouring}
+\label{sec:compound}
+
+Set $p=93$.  Let $A_1,A_2,T$ be the distance classes in
+Certificate~\ref{cert:order94}, and let $B_1,B_2,B_3$ be the three distance
+classes of the order-$453$ prototype.
+
+For $s\in\{1,2\}$, define the inherited output classes
+\begin{equation}
+\begin{split}
+A'_s={}&
+\{\ell+(\mu-1)p:\ell\in A_s,\ 1\le\mu\le452\}\\
+&{}\cup
+\{\ell+452p:\ell\in A_s,\ 1\le\ell\le40\}.
+\end{split}
+\label{eq:inherited-sets}
+\end{equation}
+For $j\in\{1,2,3\}$, relabel the three prototype colours as output colours
+$j+2$ and put
+\begin{equation}
+  B'_j=\{\ell+(\mu-1)p:\ell\in T,\ \mu\in B_j\}.
+  \label{eq:prototype-sets}
+\end{equation}
+
+\begin{lemma}[Partition]
+\label{lem:partition}
+The five sets $A'_1,A'_2,B'_1,B'_2,B'_3$ partition
+$\{1,\ldots,42076\}$.
+\end{lemma}
+
+\begin{proof}
+First consider $1\le d\le452p$.  Write $d$ uniquely as
+$d=\ell+(\mu-1)p$ with $1\le\ell\le p$ and $1\le\mu\le452$.
+If $\ell\in A_s$, then $d\in A'_s$.  If $\ell\in T$, then $\mu$ lies in
+exactly one prototype class $B_j$, and $d\in B'_j$.  These cases are
+disjoint and exhaustive.
+
+The remaining distances are $452p+\ell$ with $1\le\ell\le40$.  Since
+$T\cap\{1,\ldots,40\}=\varnothing$, each such $\ell$ lies in exactly one
+of $A_1,A_2$, and the second union in \eqref{eq:inherited-sets} assigns the
+distance uniquely.
+\end{proof}
+
+Colour the edge $\{x,y\}$, where $0\le x<y\le42076$, by the unique one of
+the five sets in Lemma~\ref{lem:partition} containing $y-x$.  This is the
+complete explicit colouring.
+
+\begin{table}[htbp]
+\centering
+\caption{Distance-class sizes in the compound colouring.}
+\label{tab:class-sizes}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+Output colour & Number of distances & Origin\\
+\midrule
+1 & 11772 & first inherited template colour\\
+2 & 12676 & second inherited template colour\\
+3 & 5304  & prototype colour 1\\
+4 & 7566  & prototype colour 2\\
+5 & 4758  & prototype colour 3\\
+\midrule
+Total & 42076 & all positive distances\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Proof of the Ramsey bound}
+\label{sec:proof}
+
+\begin{theorem}
+\label{thm:main}
+There is a five-colouring of $K_{42077}$ with no monochromatic $K_5$.
+Consequently,
+\[
+  R_5(5)\ge42078.
+\]
+\end{theorem}
+
+\begin{proof}
+We separately exclude cliques in inherited colours and in
+prototype-derived colours.
+
+\emph{Inherited colours.}
+Fix $s\in\{1,2\}$ and suppose that a colour-$s$ $K_5$ exists in the
+compound.  Translate its least vertex to $0$ and write the other vertices
+as
+\[
+  0<h_1<h_2<h_3<h_4.
+\]
+Every $h_i$ and every difference $h_j-h_i$ has a residue in $A_s$ modulo
+$p=93$.
+
+If $h_1>p$, subtract $p$ from all four positive coordinates.  If a
+consecutive gap $h_{i+1}-h_i$ exceeds $p$, subtract $p$ from the entire
+upper tail $h_{i+1},\ldots,h_4$.  These operations preserve positivity,
+strict order, and every relevant colour: differences across the cut change
+by exactly $p$, while differences within either part do not change.
+
+Iteration terminates with $h_1\le p$ and every consecutive gap at most
+$p$.  No inherited-colour edge can have length divisible by $p$, because
+the representative of residue zero is $p=93\in T$.  Hence
+$h_1\le p-1$, every consecutive gap is at most $p-1$, and
+\[
+  h_4\le4(p-1)=368.
+\]
+This gives a $K_5$ in the exact periodic graph rejected by
+Proposition~\ref{prop:order94}, a contradiction.
+
+\emph{Prototype-derived colours.}
+Fix $j\in\{1,2,3\}$ and suppose that output colour $j+2$ contains a
+$K_5$.  Translate its least vertex to $0$.  Each other vertex has a unique
+form
+\[
+  d_i=t_i+(\mu_i-1)p,
+  \qquad t_i\in T,\quad \mu_i\in B_j.
+\]
+Take two vertices with $d_i<d_k$.  If $t_i<t_k$, then the positive residue
+of $d_k-d_i$ is $t_k-t_i$.  This residue cannot lie in $T$, because
+\[
+  t_i+(t_k-t_i)=t_k
+\]
+would contradict the sum-free property of $T$.  Thus an edge in the same
+prototype-derived colour forces $t_i\ge t_k$.
+
+If $t_i=t_k$, the difference has prototype index $\mu_k-\mu_i$.  If
+$t_i>t_k$, then
+\[
+  d_k-d_i=
+  \bigl(p-(t_i-t_k)\bigr)+(\mu_k-\mu_i-1)p,
+\]
+whose prototype index is again $\mu_k-\mu_i$.  Membership of every
+pairwise difference in output colour $j+2$ therefore implies
+\[
+  \mu_k-\mu_i\in B_j.
+\]
+The indices $\mu_i$ are strictly increasing because the $d_i$ increase
+while the $t_i$ do not.  Hence
+\[
+  \{0,\mu_1,\mu_2,\mu_3,\mu_4\}
+\]
+is a monochromatic $K_5$ in prototype colour $j$, contradicting
+Proposition~\ref{prop:prototype}.
+
+All five output colours are therefore $K_5$-free.  The compound has order
+\[
+  93\cdot452+41=42077,
+\]
+so the definition of $R_5(5)$ gives $R_5(5)\ge42078$.
+\end{proof}
+
+\begin{corollary}
+The linear colouring in Theorem~\ref{thm:main} is cyclic.
+\end{corollary}
+
+\begin{proof}
+The prototype is cyclic, and Certificate~\ref{cert:order94} satisfies
+Rowley's two reflection identities stated in
+Proposition~\ref{prop:order94}(4).  Direct comparison of the expanded word
+also gives $w(d)=w(42077-d)$ for every $1\le d\le42076$.
+\end{proof}
+
+\section{Exact computational verification}
+\label{sec:verification}
+
+The computational claims in Propositions~\ref{prop:order94} and
+\ref{prop:prototype} are finite, exhaustive, and deterministic.  No random
+search decision enters their verdicts.
+
+\subsection{Clique search}
+
+Both implementations use the following exhaustive recursion, with different
+representations of the candidate set.
+
+\begin{quote}
+\ttfamily\small
+Search(prefix, candidates, need):\\
+\phantom{xx}if need = 0: return prefix\\
+\phantom{xx}if size(candidates) < need: return NONE\\
+\phantom{xx}while size(candidates) >= need:\\
+\phantom{xxxx}v = least vertex in candidates\\
+\phantom{xxxx}delete v from candidates\\
+\phantom{xxxx}next = \{u in candidates : Adj(v,u)\}\\
+\phantom{xxxx}result = Search(prefix followed by v, next, need-1)\\
+\phantom{xxxx}if result is not NONE: return result\\
+\phantom{xx}return NONE
+\end{quote}
+
+Every candidate list is strictly increasing.  At each call it consists
+exactly of the larger vertices adjacent to every prefix vertex.  Thus every
+clique is represented once.  The cardinality test prunes only branches that
+cannot reach the target size, so returning \code{NONE} is an exhaustive
+proof of nonexistence for the supplied finite graph.
+
+\subsection{Independent implementations and finite counts}
+
+The Python implementation stores forward-neighbour sets in arbitrary
+precision integer bit masks.  The C++ implementation stores ordered integer
+vectors and forms intersections by explicit pairwise filtering.  They share
+the written mathematical semantics but neither parser nor clique-search
+code.
+
+\begin{table}[htbp]
+\centering
+\caption{Exact search-node counts.  Different counts reflect different
+candidate orderings and data structures.}
+\label{tab:nodes}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Finite object and checker & Colour 1 & Colour 2 & Colour 3\\
+\midrule
+Order-$94$ template, Python & 550261 & 718490 & --\\
+Order-$453$ prototype, Python & 1040265 & 5811421 & 782585\\
+Order-$453$ prototype, C++ & 237855 & 837235 & 201199\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Seven negative fixtures test malformed length, a missing terminal template
+distance, forbidden-prefix use, an additive template triple, insufficient
+repeat span, and explicit repeated $K_5$ witnesses in each inherited colour.
+Both template implementations make the same accept/reject decisions on the
+complete fixture suite.
+
+\subsection{Source extraction and compound reconstruction}
+
+The order-$93$ published seed and the order-$453$ prototype are compared
+symbol for symbol with the ancillary XML in the fixed arXiv source archive.
+The archive SHA-256 is
+\begin{center}
+\sha{5041096a33d6898c116a35a102e521fb14fe872fb18c20ff7d30822ed4c396b2}.
+\end{center}
+
+The final expanded word is generated once by a block/residue implementation
+of \eqref{eq:inherited-sets} and \eqref{eq:prototype-sets}.  A second program,
+which does not import the generator, constructs the five displayed sets as
+literal unions, verifies that every distance $1,\ldots,42076$ occurs exactly
+once, compares every symbol with the frozen word, checks cyclic reflection,
+and confirms SHA-256
+\begin{center}
+\sha{a97d5dce8a927db2889ba220119f9d4f3d1b88ee24d441f82a803a195ae8028d}.
+\end{center}
+
+\begin{remark}
+The $42077$-vertex graph was not subjected to a naive all-vertex clique
+search.  Its $K_5$-freeness is established by the two preservation arguments
+in Theorem~\ref{thm:main}, whose finite hypotheses are checked exactly.
+\end{remark}
+
+\section{Reproducibility and review protocol}
+\label{sec:repro}
+
+The complete deterministic verification is run from the artifact package by
+\begin{quote}
+\ttfamily\small
+sh tests/run\_end\_to\_end\_checks.sh
+\end{quote}
+The suite:
+\begin{enumerate}
+  \item re-extracts the published order-$93$ seed and order-$453$ prototype
+  from the fixed ancillary XML;
+  \item verifies all three prototype colours with the Python and C++
+  clique searches;
+  \item verifies three distinct order-$94$ words with the Python and C++
+  full-condition checkers;
+  \item overtests the canonical word through distance $372$; and
+  \item reconstructs all $42076$ compound distances independently and
+  checks the frozen hash.
+\end{enumerate}
+
+An adversarial reproduction should pay particular attention to:
+\begin{itemize}
+  \item the representative $93$ for residue zero;
+  \item inclusion of $a=b$ in the sum-free test;
+  \item the distinction between maximum distance $368$ and vertex count
+  $369$;
+  \item the source-theorem wording caveat concerning the aggregate cutoff,
+  versus the explicit per-colour bound in its proof; and
+  \item the recovery of distances $1,\ldots,452$ from ancillary column
+  \code{AB}, with distance $453$ beginning template colour $4$.
+\end{itemize}
+
+The remaining nonmathematical gates are an independent-machine rerun, a
+clean-room third checker if desired, and a specialist priority search.
+
+\section{Literature status}
+
+Rowley's 2022 paper records the order-$93$ template and the resulting bound
+$R_5(5)\ge41626$ \cite{rowley-sat}.  Revision 18 of the standard dynamic
+survey, dated 24 April 2026, records the same value in Table XIa
+\cite{radziszowski}.  The January 2026 asymptotic update of Campos and
+Pohoata does not state this specific improvement \cite{campos-pohoata}.
+
+Searches for the value $42078$, an order-$94$ $(5,5,3)$ Rowley template,
+and follow-up work to the cited construction papers found no collision in
+the checked corpus.  The appropriate status is therefore:
+\begin{center}
+\textbf{not found in the checked literature; external priority review
+required.}
+\end{center}
+
+\appendix
+
+\section{Complete certificate words}
+\label{app:words}
+
+\subsection{Order-94 template}
+
+For convenience, the canonical order-$94$ word is repeated here:
+\begin{quote}
+\ttfamily\footnotesize
+11121221222212111212212111212222122121113131232132323333333333333333333333\\
+3333333232312321313
+\end{quote}
+
+\subsection{Order-453 prototype}
+
+The following seven lines are to be concatenated exactly:
+\begin{quote}
+\ttfamily\scriptsize
+12223333221211121312122313122213232232332221323223233221111122121112213132\\
+23121223231322312132323122213233211112223323122121223332322112132121112231\\
+21122233232332332323322233233211111221111123131222213122313122121322231211\\
+22233222112132223121221313221312222131321111122111112332332223323233233232\\
+33222112132211121231211223233322121221323322211112332312221323231213223132\\
+32212132231312211121221111122332322323122233232232312221313221213121112122\\
+33332221
+\end{quote}
+
+\section{Artifact inventory}
+
+\medskip\noindent\textbf{\code{results/order94\_t12.template}.}\par\nobreak
+Canonical order-$94$ certificate.  SHA-256:
+\begin{center}
+\hashbreak{a3dd3415956277d68fc0197f6f5e35c3}
+{8f2ed7936c66f11f658b0c57688abec1}.
+\end{center}
+
+\medskip\noindent\textbf{\code{sources/rowley\_exoo\_order453.prototype}.}\par\nobreak
+Source-recovered order-$453$ prototype.  SHA-256:
+\begin{center}
+\hashbreak{19c97e6279c184f6f462786cadda4b7c}
+{9773d870a5b680a04eb1503ef384a2d0}.
+\end{center}
+
+\medskip\noindent\textbf{\code{results/r5\_5\_order42077.linear-coloring}.}\par\nobreak
+Expanded $42076$-symbol five-colour distance word.  SHA-256:
+\begin{center}
+\hashbreak{a97d5dce8a927db2889ba220119f9d4}
+{f3d1b88ee24d441f82a803a195ae8028d}.
+\end{center}
+
+\medskip\noindent\textbf{\code{sources/arxiv-2203.13476-source.tar.gz}.}\par\nobreak
+Fixed source archive containing the ancillary XML.  SHA-256:
+\begin{center}
+\hashbreak{5041096a33d6898c116a35a102e521fb}
+{14fe872fb18c20ff7d30822ed4c396b2}.
+\end{center}
+
+\begin{thebibliography}{9}
+\raggedright
+
+\bibitem{rowley-general}
+F. Rowley,
+\newblock A generalised linear Ramsey graph construction,
+\newblock \emph{arXiv:1912.01164v3}, 2021.
+\newblock See Definition 3.1 and Theorem 3.2 with proof, printed pp. 4--6.
+
+\bibitem{rowley-sat}
+F. Rowley,
+\newblock Improved lower bounds for multicolour Ramsey numbers using
+SAT-solvers,
+\newblock \emph{arXiv:2203.13476v3}, 2022.
+\newblock See Section 5, Table 1, and ancillary sheet
+\code{Paper\_Sep\_2022}.
+
+\bibitem{radziszowski}
+S. P. Radziszowski,
+\newblock Small Ramsey numbers,
+\newblock \emph{Electronic Journal of Combinatorics, Dynamic Survey DS1},
+revision 18, 24 April 2026.
+\newblock DOI: \href{https://doi.org/10.37236/21}{10.37236/21}.
+
+\bibitem{campos-pohoata}
+M. Campos and C. Pohoata,
+\newblock An update on multicolor Ramsey lower bounds,
+\newblock \emph{arXiv:2601.15183v1}, 2026.
+
+\end{thebibliography}
+
+\end{document}

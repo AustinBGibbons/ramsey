@@ -1,0 +1,6 @@
+# Tiny valid semantic fixture.  Repeated color 1 is the odd-distance
+# complete bipartite graph and therefore contains no K_5.
+order 3
+phi_min 0
+repeat_span 12
+colors 13

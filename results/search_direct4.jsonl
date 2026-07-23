@@ -1,0 +1,28 @@
+{"clauses": 189, "index": 0, "kind": "direct-start", "objective": 189, "raw": 438, "score": 189, "time": 1784779963.6631548, "truncated": false}
+{"clauses": 276, "index": 1, "kind": "direct-start", "objective": 276, "raw": 666, "score": 276, "time": 1784779963.670906, "truncated": false}
+{"clauses": 55, "index": 2, "kind": "direct-start", "objective": 55, "raw": 108, "score": 55, "time": 1784779963.673295, "truncated": false}
+{"clauses": 698, "index": 3, "kind": "direct-start", "objective": 698, "raw": 1628, "score": 698, "time": 1784779963.6810932, "truncated": false}
+{"clauses": 245, "index": 4, "kind": "direct-start", "objective": 245, "raw": 526, "score": 245, "time": 1784779963.684919, "truncated": false}
+{"clauses": 305, "index": 5, "kind": "direct-start", "objective": 305, "raw": 724, "score": 305, "time": 1784779963.6893702, "truncated": false}
+{"clauses": 159, "index": 6, "kind": "direct-start", "objective": 159, "raw": 356, "score": 159, "time": 1784779963.692482, "truncated": false}
+{"clauses": 177, "index": 7, "kind": "direct-start", "objective": 177, "raw": 407, "score": 177, "time": 1784779963.696714, "truncated": false}
+{"clauses": 134, "index": 8, "kind": "direct-start", "objective": 134, "raw": 270, "score": 134, "time": 1784779963.700146, "truncated": false}
+{"clauses": 279, "index": 9, "kind": "direct-start", "objective": 279, "raw": 611, "score": 279, "time": 1784779963.7042549, "truncated": false}
+{"clauses": 110, "index": 10, "kind": "direct-start", "objective": 110, "raw": 237, "score": 110, "time": 1784779963.7069561, "truncated": false}
+{"clauses": 159, "index": 11, "kind": "direct-start", "objective": 159, "raw": 356, "score": 159, "time": 1784779963.710037, "truncated": false}
+{"clauses": 190, "index": 12, "kind": "direct-start", "objective": 190, "raw": 476, "score": 190, "time": 1784779963.7135549, "truncated": false}
+{"clauses": 319, "index": 13, "kind": "direct-start", "objective": 319, "raw": 642, "score": 319, "time": 1784779963.719949, "truncated": false}
+{"clauses": 217, "index": 14, "kind": "direct-start", "objective": 217, "raw": 459, "score": 217, "time": 1784779963.7283142, "truncated": false}
+{"clauses": 54, "index": 15, "kind": "direct-start", "objective": 54, "raw": 110, "score": 54, "time": 1784779963.7318568, "truncated": false}
+{"clauses": 329, "index": 16, "kind": "direct-start", "objective": 329, "raw": 656, "score": 329, "time": 1784779963.736942, "truncated": false}
+{"clauses": 86, "index": 17, "kind": "direct-start", "objective": 86, "raw": 175, "score": 86, "time": 1784779963.739486, "truncated": false}
+{"clauses": 173, "index": 18, "kind": "direct-start", "objective": 173, "raw": 451, "score": 173, "time": 1784779963.7428658, "truncated": false}
+{"clauses": 307, "index": 19, "kind": "direct-start", "objective": 307, "raw": 627, "score": 307, "time": 1784779963.7469199, "truncated": false}
+{"clauses": 457, "index": 20, "kind": "direct-start", "objective": 457, "raw": 1054, "score": 457, "time": 1784779963.7566988, "truncated": false}
+{"clauses": 290, "index": 21, "kind": "direct-start", "objective": 290, "raw": 656, "score": 290, "time": 1784779963.760967, "truncated": false}
+{"clauses": 205, "index": 22, "kind": "direct-start", "objective": 205, "raw": 403, "score": 205, "time": 1784779963.764975, "truncated": false}
+{"clauses": 347, "index": 23, "kind": "direct-start", "objective": 347, "raw": 891, "score": 347, "time": 1784779963.770011, "truncated": false}
+{"clauses": 14, "iteration": 1, "kind": "direct-best", "objective": 14, "raw": 28, "restart": 0, "score": 14, "time": 1784779963.874838, "word": "111212212222121112122121112122221221211133331122122233333333333333333333333333333222222113333"}
+{"clauses": 10, "iteration": 2, "kind": "direct-best", "objective": 10, "raw": 23, "restart": 0, "score": 10, "time": 1784779963.939467, "word": "111212212222121112122121112122221221211133331121122233333333333333333333333333333222222113333"}
+{"clauses": 6, "iteration": 3, "kind": "direct-best", "objective": 6, "raw": 12, "restart": 0, "score": 6, "time": 1784779964.0035572, "word": "111212212222121112122121112122221221211133331121222233333333333333333333333333333222222113333"}
+{"best_constraint_count": 6, "best_raw": 12, "best_score": 6, "best_word": "111212212222121112122121112122221221211133331121222233333333333333333333333333333222222113333", "iterations": 837, "kind": "timeout", "restarts": 24, "strategy": "direct", "time": 1784780023.2079449}

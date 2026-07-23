@@ -1,0 +1,6 @@
+# The local color word is harmless, but the repetition check is truncated:
+# order 6 requires a span of at least 4(6-2)=16.
+order 6
+phi_min 0
+repeat_span 15
+colors 12123
