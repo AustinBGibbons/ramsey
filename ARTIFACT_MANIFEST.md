@@ -281,7 +281,7 @@ SHA-256.
       "id": "ART-019",
       "kind": "regression",
       "path": ".github/workflows/verify-certificates.yml",
-      "sha256": "ad1051ca3f4f7cc0ab8fd1c781c8a90fb6594da829d7b81e8d0b69dd3f530d0d",
+      "sha256": "af0952d34f62a644199f4f3ec15c58f9b571e08c0ca388bbdeb16a235d080769",
       "command": "GitHub Actions workflow Verify certificates",
       "inputs": ["ART-018"],
       "environment": {"runners": ["ubuntu-latest", "macos-latest"], "python": "3.12", "permissions": "contents: read"},
